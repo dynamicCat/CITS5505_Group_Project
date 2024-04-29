@@ -10,29 +10,61 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
-            <!-- Navbar content omitted for brevity -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+
+    
     <div class="container mt-5">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    
+        
         <h1>{{ request.title }}</h1>
         <p><strong>Description:</strong> {{ request.description }}</p>
 
-        <!-- Display responses -->
-        <h2>Responses:</h2>
-        {% if responses %}
-            <ul class="list-group">
-                {% for response in responses %}
-                    <li class="list-group-item">
-                        <strong>{{ response.user.username }}:</strong>
-                        <p>{{ response.response_text }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No responses yet.</p>
-        {% endif %}
+        <h2>Accepted by:</h2>
+        <ul>{% for user in request.accepted_by %}
+            <li>{{ user.username }}</li>
+            {% endfor %}
+        </ul>
+<!-- Display accepted responses -->
+<h2>Accepted Responses:</h2>
+<ul class="list-group">
+    {% for response in accepted_responses %}
+        <li class="list-group-item">
+            <strong>{{ response.responder.username }}:</strong>
+            <p>{{ response.response_text }}</p>
+        </li>
+    {% endfor %}
+</ul>
+
       
         <a href="{{ url_for('accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
+
+        
     </div>
 </body>
 </html>

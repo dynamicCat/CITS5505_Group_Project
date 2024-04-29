@@ -4,7 +4,7 @@ from flask_migrate import Migrate
 
 app = Flask(__name__, template_folder='templates')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = 'CITS5505'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -12,25 +12,26 @@ migrate = Migrate(app, db)
 
 
 #Database
+#Create association table
+accepted_requests = db.Table('accepted_requests',
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
+    db.Column('request_id', db.Integer, db.ForeignKey('request.id'), primary_key=True)
+)
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
-    # Relationships
-    # Specifying which foreign key to use for 'requests'
-    requests = db.relationship('Request', foreign_keys='Request.user_id', backref='user', lazy=True)
-    # Specifying which foreign key to use for responses
-    responses = db.relationship('Response', foreign_keys='Response.user_id', backref='user', lazy=True)
-    accepted_requests = db.relationship('Request', foreign_keys='Request.accepted_by', backref='acceptor', lazy='dynamic')
-
+    accepted_requests = db.relationship('Request', secondary=accepted_requests, lazy='subquery',backref=db.backref('accepted_by', lazy=True))
+    responses = db.relationship('Response', backref='responder', lazy=True) 
 
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    accepted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(300), nullable=False)
     status = db.Column(db.String(10), default='open')
+
 
 class Response(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -136,29 +137,44 @@ def search_requests():
 @app.route('/request_details/<int:request_id>', methods=['GET'])
 def request_details(request_id):
     request = Request.query.get(request_id)
-    if request:
-       # Get all answers related to the request and add user information
-        responses = Response.query.filter_by(request_id=request_id).join(User, Response.user_id == User.id).all()
-        return render_template('request_details.html', request=request, responses=responses)
-    else:
+    if not request:
         flash('Request not found.')
         return redirect(url_for('search_requests'))
+
+   # Get answers from all users who accepted the request
+    accepted_responses = Response.query.filter_by(request_id=request_id).all()
+
+    # Get the current user
+    user_id = session.get('user_id')
+    current_user = User.query.get(user_id) if user_id else None
+    
+    return render_template('request_details.html', request=request, accepted_responses=accepted_responses, current_user=current_user)
 
 
 @app.route('/accept_request/<int:request_id>', methods=['GET'])
 def accept_request(request_id):
     user_id = session.get('user_id')
-    if user_id:
-        request_to_accept = Request.query.get(request_id)
-        if request_to_accept and request_to_accept.accepted_by is None:
-            request_to_accept.accepted_by = user_id
-            db.session.commit()
-            flash('Request accepted successfully.')
-        else:
-            flash('Request not found or already accepted.')
-    else:
-        flash('You need to login first.')
+    if not user_id:
+        flash('You need to login first.', 'error')
+        return redirect(url_for('login'))
+
+    request_to_accept = Request.query.get(request_id)
+    if not request_to_accept:
+        flash('Request not found.', 'error')
+        return redirect(url_for('search_requests'))
+
+    current_user = User.query.get(user_id)
+    if current_user in request_to_accept.accepted_by:
+        # If the current user has accepted the request, display a flash message to remind the user not to accept the request again.
+        flash('You have already accepted this request. Please do not accept it again.', 'info')
+        return redirect(url_for('request_details', request_id=request_id))
+
+    # If the current user has not accepted the request, add him to the recipient list and save
+    request_to_accept.accepted_by.append(current_user)
+    db.session.commit()
+    flash('Request accepted successfully.', 'success')
     return redirect(url_for('request_details', request_id=request_id))
+
 
 
 
@@ -166,11 +182,13 @@ def accept_request(request_id):
 def my_accepted_requests():
     user_id = session.get('user_id')
     if user_id:
-        accepted_requests = Request.query.filter_by(accepted_by=user_id).all()
+        user = User.query.get(user_id)
+        accepted_requests = user.accepted_requests  # This will fetch the accepted requests for the user
         return render_template('my_accepted_requests.html', accepted_requests=accepted_requests)
     else:
         flash('Please log in to view accepted requests.')
         return redirect(url_for('login'))
+
 
 
 
@@ -182,13 +200,16 @@ def answer_request(request_id):
     if not request:
         flash('Request not found.')
         return redirect(url_for('dashboard'))
+
+    user_id = session.get('user_id')
+    current_user = User.query.get(user_id)
     
-    # Make sure the user has accepted the request
-    if request.user_id != session.get('user_id'):
+    if current_user in request.accepted_by:
+        return render_template('answer_request.html', request=request)
+    else:
         flash('You have not accepted this request.')
         return redirect(url_for('dashboard'))
 
-    return render_template('answer_request.html', request=request)
 
 @app.route('/submit_answer/<int:request_id>', methods=['POST'])
 def submit_answer(request_id):
