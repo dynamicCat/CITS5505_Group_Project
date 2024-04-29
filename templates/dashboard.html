@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-    <!-- 引入 Bootstrap CSS -->
+   <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
-        <!-- 用户欢迎信息 -->
+        <!-- User welcome message -->
         <div class="jumbotron">
             <h1 class="display-4">Hello, {{ user.username }}!</h1>
             <p class="lead">This is your personal dashboard where you can view and manage your requests and responses.</p>
@@ -19,7 +19,7 @@
             <a class="btn btn-secondary btn-lg" href="{{ url_for('logout') }}" role="button">sign out</a>
         </div>
 
-        <!-- 用户请求 -->
+        <!-- User request -->
         <div class="mb-5">
             <h2>your request</h2>
             {% if requests %}
@@ -33,7 +33,7 @@
             {% endif %}
         </div>
 
-        <!-- 用户回应 -->
+        <!-- User response -->
         <div class="mb-5">
             <h2>your response</h2>
             {% if responses %}
