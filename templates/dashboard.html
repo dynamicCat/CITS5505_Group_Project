@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-   <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <!-- User welcome message -->
         <div class="jumbotron">
@@ -16,9 +33,14 @@
             <hr class="my-4">
             <p>Use the buttons below to create a new request or log out.</p>
             <a class="btn btn-primary btn-lg" href="{{ url_for('create_request') }}" role="button">Create request</a>
+            <a class="btn btn-info btn-lg" href="{{ url_for('search_requests') }}" role="button">Search Requests</a>
            <!-- <a class="btn btn-secondary btn-lg" href="{{ url_for('logout') }}" role="button">sign out</a>-->
         </div>
 
+
+
+
+        
         <!-- User request -->
         <div class="mb-5">
             <h2>My requests</h2>

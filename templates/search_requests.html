@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Requests</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Search Requests</h1>
+        <form action="{{ url_for('search_requests') }}" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="query" placeholder="Type to search for requests...">
+                <button type="submit" class="btn btn-primary mt-3">Search</button>
+            </div>
+        </form>
+        <!-- Display search results -->
+        <div class="list-group">
+            {% for request in search_results %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ request.title }}</h5>
+                </div>
+                <p class="mb-1">{{ request.description }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

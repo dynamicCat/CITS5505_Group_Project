@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RequestHub</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h1>Welcome to RequestHub</h1>
+        <p class="lead">The place where you can post requests, solve puzzles, and engage with your community.</p>
+        <hr>
+        <p>Get started by either logging in to your existing account or creating a new one to explore the possibilities.</p>
+        <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
+        <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
+    </div>
+</body>
+</html>

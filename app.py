@@ -43,32 +43,47 @@ class Response(db.Model):
 
 @app.route('/')
 def home():
-    return render_template('login.html')
+    return render_template('introductory.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    error_message = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(username=username, password=password).first()
-        if user:
+        user = User.query.filter_by(username=username).first()
+        
+        if user and user.password == password:
             session['user_id'] = user.id
             return redirect(url_for('dashboard'))
+        elif user:
+            error_message = 'Incorrect password.'
         else:
-            flash('Invalid username or password')
-    return render_template('login.html')
+            error_message = 'User not found.'
+
+    return render_template('login.html', error_message=error_message)
+
+
+
+
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
+    error_message = None
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        new_user = User(username=username, password=password)
-        db.session.add(new_user)
-        db.session.commit()
-        flash('Registration successful. Please login.')
-        return redirect(url_for('login'))
-    return render_template('register.html')
+
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            error_message = 'Username already taken. Please choose another one.'
+        else:
+            new_user = User(username=username, password=password)
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect(url_for('login'))
+
+    return render_template('register.html', error_message=error_message)
 
 @app.route('/dashboard')
 def dashboard():
@@ -90,9 +105,27 @@ def dashboard():
 @app.route('/create_request', methods=['GET', 'POST'])
 def create_request():
     if request.method == 'POST':
-        # Implement the logic of creating a request
-        pass
+        title = request.form.get('title')
+        description = request.form.get('description')
+        user_id = session.get('user_id')
+        if user_id and title and description:
+            new_request = Request(title=title, description=description, user_id=user_id)
+            db.session.add(new_request)
+            db.session.commit()
+            flash('Request created successfully.')
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Please fill all the fields.')
     return render_template('create_request_form.html')
+
+@app.route('/search_requests', methods=['GET'])
+def search_requests():
+    query = request.args.get('query', '')
+    search_results = []
+    if query:
+        search_results = Request.query.filter(Request.title.contains(query) | Request.description.contains(query)).all()
+    return render_template('search_requests.html', search_results=search_results)
+
 
 @app.route('/logout')
 def logout():

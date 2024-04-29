@@ -4,40 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Request</title>
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
- 
 </head>
 <body>
-    <div class="container">
-        <h2 class="mt-5">Create a New Request</h2>
-        <p>Fill out the form below to post a new request.</p>
-
-        <!-- Create Request Form -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1>Create a New Request</h1>
         <form action="/create_request" method="POST">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
             </div>
-
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe your request" required></textarea>
             </div>
-
-            <!-- Optional: Other fields like categories, tags, rewards, etc. can be added here -->
-
             <button type="submit" class="btn btn-primary">Submit Request</button>
         </form>
-
-        <!-- Include links back to the dashboard -->
         <hr>
         <a href="/dashboard" class="btn btn-secondary mt-3">Back to Dashboard</a>
     </div>
-
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
+
