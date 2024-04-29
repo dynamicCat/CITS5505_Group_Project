@@ -17,12 +17,17 @@ class User(db.Model):
     username = db.Column(db.String(80), unique=True, nullable=False)
     password = db.Column(db.String(80), nullable=False)
     # Relationships
-    requests = db.relationship('Request', backref='user', lazy=True)
-    responses = db.relationship('Response', backref='user', lazy=True)
+    # Specifying which foreign key to use for 'requests'
+    requests = db.relationship('Request', foreign_keys='Request.user_id', backref='user', lazy=True)
+    # Specifying which foreign key to use for responses
+    responses = db.relationship('Response', foreign_keys='Response.user_id', backref='user', lazy=True)
+    accepted_requests = db.relationship('Request', foreign_keys='Request.accepted_by', backref='acceptor', lazy='dynamic')
+
 
 class Request(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    accepted_by = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)  
     title = db.Column(db.String(120), nullable=False)
     description = db.Column(db.String(300), nullable=False)
     status = db.Column(db.String(10), default='open')
@@ -125,6 +130,81 @@ def search_requests():
     if query:
         search_results = Request.query.filter(Request.title.contains(query) | Request.description.contains(query)).all()
     return render_template('search_requests.html', search_results=search_results)
+
+
+
+@app.route('/request_details/<int:request_id>', methods=['GET'])
+def request_details(request_id):
+    request = Request.query.get(request_id)
+    if request:
+       # Get all answers related to the request and add user information
+        responses = Response.query.filter_by(request_id=request_id).join(User, Response.user_id == User.id).all()
+        return render_template('request_details.html', request=request, responses=responses)
+    else:
+        flash('Request not found.')
+        return redirect(url_for('search_requests'))
+
+
+@app.route('/accept_request/<int:request_id>', methods=['GET'])
+def accept_request(request_id):
+    user_id = session.get('user_id')
+    if user_id:
+        request_to_accept = Request.query.get(request_id)
+        if request_to_accept and request_to_accept.accepted_by is None:
+            request_to_accept.accepted_by = user_id
+            db.session.commit()
+            flash('Request accepted successfully.')
+        else:
+            flash('Request not found or already accepted.')
+    else:
+        flash('You need to login first.')
+    return redirect(url_for('request_details', request_id=request_id))
+
+
+
+@app.route('/my_accepted_requests')
+def my_accepted_requests():
+    user_id = session.get('user_id')
+    if user_id:
+        accepted_requests = Request.query.filter_by(accepted_by=user_id).all()
+        return render_template('my_accepted_requests.html', accepted_requests=accepted_requests)
+    else:
+        flash('Please log in to view accepted requests.')
+        return redirect(url_for('login'))
+
+
+
+
+
+@app.route('/answer_request/<int:request_id>', methods=['GET'])
+def answer_request(request_id):
+    request = Request.query.get(request_id)
+    if not request:
+        flash('Request not found.')
+        return redirect(url_for('dashboard'))
+    
+    # Make sure the user has accepted the request
+    if request.user_id != session.get('user_id'):
+        flash('You have not accepted this request.')
+        return redirect(url_for('dashboard'))
+
+    return render_template('answer_request.html', request=request)
+
+@app.route('/submit_answer/<int:request_id>', methods=['POST'])
+def submit_answer(request_id):
+    response_text = request.form.get('response')
+    if response_text:
+        #Create an answer instance and save it to the database
+        new_response = Response(request_id=request_id, user_id=session.get('user_id'), response_text=response_text)
+        db.session.add(new_response)
+        db.session.commit()
+        flash('Your answer was submitted successfully.')
+    else:
+        flash('Your answer cannot be empty.')
+
+    return redirect(url_for('answer_request', request_id=request_id))
+
+
 
 
 @app.route('/logout')

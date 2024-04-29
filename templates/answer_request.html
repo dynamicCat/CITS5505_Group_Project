@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answer Request</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Answer Request: {{ request.title }}</h1>
+        <p><strong>Description:</strong> {{ request.description }}</p>
+        <form action="{{ url_for('submit_answer', request_id=request.id) }}" method="POST">
+            <div class="form-group">
+                <label for="response">Your Answer</label>
+                <textarea class="form-control" id="response" name="response" rows="5" placeholder="Type your answer here..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Answer</button>
+        </form>
+        <hr>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</body>
+</html>
