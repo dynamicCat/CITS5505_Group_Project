@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- 用户欢迎信息 -->
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, {{ user.username }}!</h1>
+            <p class="lead">This is your personal dashboard where you can view and manage your requests and responses.</p>
+            <hr class="my-4">
+            <p>Use the buttons below to create a new request or log out.</p>
+            <a class="btn btn-primary btn-lg" href="{{ url_for('create_request') }}" role="button">Create request</a>
+            <a class="btn btn-secondary btn-lg" href="{{ url_for('logout') }}" role="button">sign out</a>
+        </div>
+
+        <!-- 用户请求 -->
+        <div class="mb-5">
+            <h2>your request</h2>
+            {% if requests %}
+            <ul class="list-group">
+                {% for request in requests %}
+                <li class="list-group-item">{{ request.title }} - {{ request.description }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No requests yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- 用户回应 -->
+        <div class="mb-5">
+            <h2>your response</h2>
+            {% if responses %}
+            <ul class="list-group">
+                {% for response in responses %}
+                <li class="list-group-item">{{ response.response_text }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No response yet.</p>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+</body>

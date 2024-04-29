@@ -1,0 +1,113 @@
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+app = Flask(__name__, template_folder='templates')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SECRET_KEY'] = 'your_secret_key'
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+
+
+
+#Database
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(80), nullable=False)
+    # Relationships
+    requests = db.relationship('Request', backref='user', lazy=True)
+    responses = db.relationship('Response', backref='user', lazy=True)
+
+class Request(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    title = db.Column(db.String(120), nullable=False)
+    description = db.Column(db.String(300), nullable=False)
+    status = db.Column(db.String(10), default='open')
+
+class Response(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    request_id = db.Column(db.Integer, db.ForeignKey('request.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    response_text = db.Column(db.Text, nullable=False)
+
+
+
+
+
+
+# Routes
+
+
+@app.route('/')
+def home():
+    return render_template('login.html')
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username, password=password).first()
+        if user:
+            session['user_id'] = user.id
+            return redirect(url_for('dashboard'))
+        else:
+            flash('Invalid username or password')
+    return render_template('login.html')
+
+@app.route('/register', methods=['POST', 'GET'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        new_user = User(username=username, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Registration successful. Please login.')
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+@app.route('/dashboard')
+def dashboard():
+    user_id = session.get('user_id')
+    if user_id:
+        user = User.query.get(user_id)
+        if user:
+            user_requests = Request.query.filter_by(user_id=user_id).all()
+            user_responses = Response.query.filter_by(user_id=user_id).all()
+            return render_template('dashboard.html', user=user, requests=user_requests, responses=user_responses)
+        else:
+            flash('User not found')
+            return redirect(url_for('login'))
+    else:
+        flash('Please login first')
+        return redirect(url_for('login'))
+    
+
+@app.route('/create_request', methods=['GET', 'POST'])
+def create_request():
+    if request.method == 'POST':
+        # 实现创建请求的逻辑
+        pass
+    return render_template('create_request_form.html')
+
+@app.route('/logout')
+def logout():
+    # 清除会话中的用户信息
+    session.pop('user_id', None)  # 假设 'user_id' 是存储在会话中的用户标识
+    flash('You have been logged out.')
+    return redirect(url_for('login'))  # 重定向到登录页面
+
+
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
+
+
+
+
