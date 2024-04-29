@@ -90,16 +90,16 @@ def dashboard():
 @app.route('/create_request', methods=['GET', 'POST'])
 def create_request():
     if request.method == 'POST':
-        # 实现创建请求的逻辑
+        # Implement the logic of creating a request
         pass
     return render_template('create_request_form.html')
 
 @app.route('/logout')
 def logout():
-    # 清除会话中的用户信息
-    session.pop('user_id', None)  # 假设 'user_id' 是存储在会话中的用户标识
+    # Clear user information in the session
+    session.pop('user_id', None) # Assume 'user_id' is the user ID stored in the session
     flash('You have been logged out.')
-    return redirect(url_for('login'))  # 重定向到登录页面
+    return redirect(url_for('login'))  # Redirect to login page
 
 
 
