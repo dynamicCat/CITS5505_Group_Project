@@ -31,17 +31,19 @@ This application uses Flask as the backend framework and uses SQLite database fo
 
 To start the application locally, follow these steps:
 1. Clone the repository:
-   \```bash
-   git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
-   \```
+```bash
+git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
+```
+
 2. Install dependencies:
-    \```bash
+```bash
     pip install -r requirements.txt
-    \```
+```
+
 3. Run the application:
-    \```bash
+```bash
     flask run
-    \```
+```
 4. Visit `http://localhost:5000` in your browser to get started. 
 
 ## Run the test
