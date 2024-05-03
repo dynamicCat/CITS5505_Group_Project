@@ -37,12 +37,12 @@ git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
 
 2. Install dependencies:
 ```bash
-    pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 3. Run the application:
 ```bash
-    flask run
+flask run
 ```
 4. Visit `http://localhost:5000` in your browser to get started. 
 
