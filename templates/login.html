@@ -5,51 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
    
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 </head>
+
 <body>
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="Login Image" class="img-fluid">
-                </div>
-                <div class="col-md-6 contents">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="mb-4">
-                                <h3>Login</h3>
-                            </div>
-                            {% if error_message %}
-                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                    {{ error_message }}
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% endif %}
-                            <form method="POST" action="{{ url_for('login') }}">
-                                <div class="form-group first">
-                                    <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
-                                </div>
-                                <div class="form-group last mb-4">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-                                </div>
-                                <div class="d-flex mb-5 align-items-center">
-                                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p> 
-                                </div>
-                                <button type="submit" class="btn btn-primary">Login</button>
-                            </form>
-                        </div>           
+    <header id="header">
+        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="#banner">Home</a></button></li>
+                <li><a href="#about-us">About</a></li>
+                <li><a href="#app-function">Product</a></li>
+                <li><a href="#key-developers">Developers</a></li>
+                <li><a href="#contact">contact us</a></li>
+                <li><a href="{{ url_for('register') }}" class="button">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="login-container">
+            <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="Login Image" class="login-image">
+            <div class="login-form">
+                <h1>Login</h1>
+                {% if error_message %}
+                    <div class="custom-alert">
+                        {{ error_message }}
+                        <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
+                {% endif %}     
+
+                <form method="POST" action="{{ url_for('login') }}">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                    </div>
+                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
             </div>
         </div>
     </div>

@@ -4,16 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to RequestHub</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/introductory.css') }}">
 </head>
 <body>
-    <div class="container mt-5 text-center">
-        <h1>Welcome to RequestHub</h1>
-        <p class="lead">The place where you can post requests, solve puzzles, and engage with your community.</p>
-        <hr>
-        <p>Get started by either logging in to your existing account or creating a new one to explore the possibilities.</p>
-        <a href="{{ url_for('register') }}" class="btn btn-primary">Register</a>
-        <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
-    </div>
+    <header id="header">
+        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="#banner">Home</a></button></li>
+                <li><a href="#about-us">About</a></li>
+                <li><a href="#app-function">Product</a></li>
+                <li><a href="#key-developers">Developers</a></li>
+                <li><a href="#contact">contact us</a></li>
+                <li><a href="{{ url_for('login') }}" class="button">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="banner">
+        <div class="inner">
+            <h2>Welcome to RequestHub</h2>
+            <p>The place where you can post requests, solve puzzles, and engage with your community.</p>
+            <hr>
+            <p>Get started by either logging in to your existing account or creating a new one to explore the possibilities.</p>
+            <ul class="actions">
+                <li><a href="{{ url_for('register') }}" class="button big special">Sign Up</a></li>
+                <li><a href="{{ url_for('login') }}" class="button big alt">Login</a></li>
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
