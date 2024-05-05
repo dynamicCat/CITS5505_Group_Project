@@ -5,36 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-    <!-- js -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+   
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Register</h1>
-        {% if error_message %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                {{ error_message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <header id="header">
+        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                <li><a href="#banner">Home</a></button></li>
+                <li><a href="#about-us">About</a></li>
+                <li><a href="#app-function">Product</a></li>
+                <li><a href="#key-developers">Developers</a></li>
+                <li><a href="#contact">contact us</a></li>
+                <li><a href="{{ url_for('login') }}" class="button">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="login-container">
+            <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="Register Image" class="login-image">
+            <div class="login-form">
+                <h1>Register</h1>
+                {% if error_message %}
+                    <div class="custom-alert">
+                        {{ error_message }}
+                        <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}     
+
+                <form method="POST" action="{{ url_for('register') }}">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
+                    </div>
+                    <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
             </div>
-        {% endif %}
-        <form method="POST" action="{{ url_for('register') }}">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
-        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+        </div>
     </div>
 </body>
 </html>
