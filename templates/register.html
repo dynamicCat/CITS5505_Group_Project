@@ -7,6 +7,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
    
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/js.js') }}"></script>
@@ -16,11 +17,6 @@
         <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
         <nav id="nav">
             <ul>
-                <li><a href="#banner">Home</a></button></li>
-                <li><a href="#about-us">About</a></li>
-                <li><a href="#app-function">Product</a></li>
-                <li><a href="#key-developers">Developers</a></li>
-                <li><a href="#contact">contact us</a></li>
                 <li><a href="{{ url_for('login') }}" class="button">Login</a></li>
             </ul>
         </nav>

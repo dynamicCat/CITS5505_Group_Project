@@ -7,6 +7,11 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/introductory.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome-4.7.0/css/font-awesome.min.css') }}">
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 </head>
 <body>
     <header id="header">
@@ -14,10 +19,9 @@
         <nav id="nav">
             <ul>
                 <li><a href="#banner">Home</a></button></li>
-                <li><a href="#about-us">About</a></li>
-                <li><a href="#app-function">Product</a></li>
-                <li><a href="#key-developers">Developers</a></li>
-                <li><a href="#contact">contact us</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#function">Product</a></li>
+                <li><a href="#footer">contact us</a></li>
                 <li><a href="{{ url_for('login') }}" class="button">Login</a></li>
             </ul>
         </nav>
@@ -35,5 +39,87 @@
             </ul>
         </div>
     </section>
+    
+    <section id="about">
+        <div class="major">
+            <h2>Ipsum feugiat consequat</h2>
+            <p>Tempus adipiscing commodo ut aliquam blandit</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="card">
+                    <div class="special box">
+                        <i class="icon fa-area-chart major"></i>
+                        <h3>Justo placerat</h3>
+                        <p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="special box">
+                        <i class="icon fa-refresh major"></i>
+                        <h3>Blandit quis curae</h3>
+                        <p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="special box">
+                        <i class="icon fa-cog major"></i>
+                        <h3>Amet sed accumsan</h3>
+                        <p>Eu non col commodo accumsan ante mi. Commodo consectetur sed mi adipiscing accumsan ac nunc tincidunt lobortis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="function">
+        <div class="major">
+            <h2>Commodo accumsan aliquam</h2>
+            <p>Amet nisi nunc lorem accumsan</p>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="half">
+                    <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="" width="680" height="308">
+                    <h3>Mollis adipiscing nisl</h3>
+                    <p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
+                </div>
+
+                <div class="half">
+                    <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="" width="680" height="308">
+                    <h3>Neque ornare adipiscing</h3>
+                    <p>Eget mi ac magna cep lobortis faucibus accumsan enim lacinia adipiscing metus urna adipiscing cep commodo id. Ac quis arcu amet. Arcu nascetur lorem adipiscing non faucibus odio nullam arcu lobortis. Aliquet ante feugiat. Turpis aliquet ac posuere volutpat lorem arcu aliquam lorem.</p>
+                </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="half">
+                    <h2>Accumsan</h2>
+                    <ul class="alt">
+                        <li><span>Nascetur nunc varius</span></li>
+                        <li><span>Vis faucibus sed tempor</span></li>
+                        <li><span>Massa amet lobortis vel</span></li>
+                        <li><span>Nascetur nunc varius</span></li>
+                    </ul>
+                </div>             
+                <div class="half">
+                    <h2>Aliquam Interdum</h2>
+                    <p>Blandit nunc tempor lobortis nunc non. Mi accumsan. Justo aliquet massa adipiscing cubilia eu accumsan id. Arcu accumsan faucibus vis ultricies adipiscing ornare ut. Mi accumsan justo aliquet.</p>
+                    <ul class="icons">
+                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
