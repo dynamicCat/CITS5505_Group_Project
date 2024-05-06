@@ -15,7 +15,7 @@ RequestHub is an interactive web platform that allows users to create accounts, 
 | 24065267 | Zhenhao Zhu | dynamicCat    |
 | 23797775 | Zihan Peng | ZihanPeng      |
 | 23769386 | Yuchen Wang |        |
-| 23964581 | Renjun Liu |         |
+| 23964581 | Renjun Liu | Ethaicraft |
 
 ## Application Architecture
 
