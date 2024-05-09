@@ -27,27 +27,28 @@
             <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="Register Image" class="login-image">
             <div class="login-form">
                 <h1>Register</h1>
-                {% if error_message %}
-                    <div class="custom-alert">
-                        {{ error_message }}
-                        <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}     
+                {% for message in get_flashed_messages(category_filter=['error', 'success']) %}
+                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+
 
                 <form method="POST" action="{{ url_for('register') }}">
+                    {{ form.hidden_tag() }}
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Choose a username" required>
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control") }}
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Choose a password" required>
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control") }}
                     </div>
                     <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">Create New User</button>
                 </form>
+
+
             </div>
         </div>
     </div>

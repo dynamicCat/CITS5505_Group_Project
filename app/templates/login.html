@@ -28,27 +28,28 @@
             <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="Login Image" class="login-image">
             <div class="login-form">
                 <h1>Login</h1>
-                {% if error_message %}
-                    <div class="custom-alert">
-                        {{ error_message }}
-                        <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}     
+                {% for message in get_flashed_messages(category_filter=['error', 'success']) %}
+                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+
 
                 <form method="POST" action="{{ url_for('login') }}">
+                    {{ form.hidden_tag() }}
                     <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+                        {{ form.username.label(class="form-label") }}
+                        {{ form.username(class="form-control") }}
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+                        {{ form.password.label(class="form-label") }}
+                        {{ form.password(class="form-control") }}
                     </div>
                     <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
                     <button type="submit" class="btn btn-primary">Login</button>
                 </form>
+
             </div>
         </div>
     </div>
