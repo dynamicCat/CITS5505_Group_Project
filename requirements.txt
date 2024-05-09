@@ -3,3 +3,5 @@ flask_sqlalchemy
 flask_migrate
 flask_wtf
 wtforms
+
+"Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage."

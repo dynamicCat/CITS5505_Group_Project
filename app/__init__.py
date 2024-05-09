@@ -1,11 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+
 
 app = Flask(__name__)
 app.config.from_object('config.Config')
