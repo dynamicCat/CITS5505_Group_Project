@@ -35,8 +35,8 @@ To start the application locally, follow these steps:
 git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
 ```
 
-2. Install dependencies:
-"Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage."
+2. Install dependencies:   
+Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage.
 ```bash
 pip install -r requirements.txt
 ```
