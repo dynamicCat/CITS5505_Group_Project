@@ -1,0 +1,143 @@
+/* navbar: Defines the basic style of the navigation bar. */
+.navbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+}
+
+/* navbar-expand-lg: Makes the navigation bar expandable on large screens. */
+.navbar-expand-lg {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+/* navbar-light bg-light: Sets the navigation bar's background to light color. */
+.navbar-light.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* container: Defines a container for page content with a maximum width and responsive behavior. */
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* navbar-brand: Defines the style for the brand/logo in the navigation bar. */
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+/* navbar-toggler: Defines the style for the collapsible toggle button in the navigation bar. */
+.navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+/* navbar-nav: Defines the style for navigation links in the navigation bar. */
+.navbar-nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+/* nav-item: Defines the style for navigation items. */
+.nav-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+/* nav-link: Defines the style for navigation links. */
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* form-group: Defines a group for form elements and sets some default styles. */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+/* form-control: Defines the style for form controls like input fields. */
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* btn: Defines the style for buttons. */
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+/* btn-primary: Defines the primary style for buttons, typically used for primary actions. */
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* btn-secondary: Defines the secondary style for buttons, typically used for secondary actions. */
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* mt-3: Adds a top margin of 3 units, used to create space above elements like buttons. */
+.mt-3 {
+    margin-top: 1rem !important;
+}
