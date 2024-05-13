@@ -18,6 +18,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
             session['user_id'] = user.id
+            session['username'] = user.username
             return redirect(url_for('dashboard'))
         elif user:
             flash('Incorrect password.', 'error')
@@ -159,10 +160,17 @@ def answer_request(request_id):
         return redirect(url_for('dashboard'))
 
     user_id = session.get('user_id')
+    if user_id is None:
+        flash('Please log in to view the request details.')
+        return redirect(url_for('login'))
+
     current_user = User.query.get(user_id)
     
+    # Get all answers to this request
+    responses = Response.query.filter_by(request_id=request_id).all()
+
     if current_user in request.accepted_by:
-        return render_template('answer_request.html', request=request)
+        return render_template('answer_request.html', request=request, responses=responses, current_user=current_user)
     else:
         flash('You have not accepted this request.')
         return redirect(url_for('dashboard'))
