@@ -20,14 +20,20 @@
             </div>
         </form>
         <!-- Display search results -->
-        <div class="list-group">
-            {% for request in search_results %}
-            <a href="{{ url_for('request_details', request_id=request.id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
-                <h5 class="mb-1">{{ request.title }}</h5>
-                <p class="mb-1">{{ request.description }}</p>
-            </a>
-            {% endfor %}
-        </div>
+        {% if search_results %}
+            <div class="list-group">
+                {% for request in search_results %}
+                    <a href="{{ url_for('request_details', request_id=request.id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <h5 class="mb-1">{{ request.title }}</h5>
+                        <p class="mb-1">{{ request.description }}</p>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                No requests found. Please try a different search query.
+            </div>
+        {% endif %}
     </div>
 
 
