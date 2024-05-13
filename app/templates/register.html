@@ -27,9 +27,13 @@
             <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="Register Image" class="login-image">
             <div class="login-form">
                 <h1>Register</h1>
+            
                 {% for message in get_flashed_messages(category_filter=['error', 'success']) %}
-                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }}">
+                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }} custom-alert">
                     {{ message }}
+                    <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 {% endfor %}
 
