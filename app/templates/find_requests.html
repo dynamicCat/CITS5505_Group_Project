@@ -15,6 +15,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                    {% if session.get('username') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
@@ -25,6 +30,7 @@
             </div>
         </div>
     </nav>
+    
     <div class="container mt-5">
         <h1>Search Requests</h1>
         
