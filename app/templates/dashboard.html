@@ -31,7 +31,8 @@
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
                     <li class="nav-item align-items-center d-flex">
-                        <img src="{{ session.get('avatar_url') }}" alt="Avatar" class="navbar-avatar">
+                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+
                         <a class="nav-link" href="{{ url_for('update_profile') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}

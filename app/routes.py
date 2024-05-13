@@ -240,11 +240,14 @@ def search_avatar():
 @app.route('/set_avatar')
 def set_avatar():
     image_url = request.args.get('image_url')
-    user = User.query.get_or_404(session['user_id'])
-    user.avatar_url = image_url
-    db.session.commit()
-    flash('Avatar updated successfully.')
-    return redirect(url_for('update_profile'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    if user:
+        user.avatar_url = image_url
+        db.session.commit()
+        flash('Avatar updated successfully!', 'success')
+    return redirect(url_for('dashboard'))
+
 
 
 @app.route('/logout')
