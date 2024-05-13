@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Requests</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .navbar-avatar {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-right: 10px; 
+        }
+    </style>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
@@ -21,8 +30,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                    <li class="nav-item align-items-center d-flex">
+                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+
+                        <a class="nav-link" href="{{ url_for('update_profile') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">

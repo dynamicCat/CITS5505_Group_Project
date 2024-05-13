@@ -87,10 +87,12 @@ def dashboard():
 
 @app.route('/create_request', methods=['GET', 'POST'])
 def create_request():
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
     if request.method == 'POST':
         title = request.form.get('title')
         description = request.form.get('description')
-        user_id = session.get('user_id')
+        
         if user_id and title and description:
             new_request = Request(title=title, description=description, user_id=user_id)
             db.session.add(new_request)
@@ -99,15 +101,17 @@ def create_request():
             return redirect(url_for('dashboard'))
         else:
             flash('Please fill all the fields.')
-    return render_template('create_request_form.html')
+    return render_template('create_request_form.html', user = user)
 
 @app.route('/search_requests', methods=['GET'])
 def search_requests():
+    user_id = session.get('user_id')
+    user = User.query.get(user_id)
     query = request.args.get('query', '')
     search_results = []
     if query:
         search_results = Request.query.filter(Request.title.contains(query) | Request.description.contains(query)).all()
-    return render_template('search_requests.html', search_results=search_results)
+    return render_template('search_requests.html', search_results=search_results, user = user)
 
 
 
@@ -144,13 +148,13 @@ def accept_request(request_id):
     if current_user in request_to_accept.accepted_by:
         # If the current user has accepted the request, display a flash message to remind the user not to accept the request again.
         flash('You have already accepted this request. Please do not accept it again.', 'info')
-        return redirect(url_for('request_details', request_id=request_id))
+        return redirect(url_for('request_details', request_id=request_id,current_user=current_user))
 
     # If the current user has not accepted the request, add him to the recipient list and save
     request_to_accept.accepted_by.append(current_user)
     db.session.commit()
     flash('Request accepted successfully.', 'success')
-    return redirect(url_for('request_details', request_id=request_id))
+    return redirect(url_for('request_details', request_id=request_id,current_user=current_user))
 
 
 
@@ -161,7 +165,7 @@ def my_accepted_requests():
     if user_id:
         user = User.query.get(user_id)
         accepted_requests = user.accepted_requests  # This will fetch the accepted requests for the user
-        return render_template('my_accepted_requests.html', accepted_requests=accepted_requests)
+        return render_template('my_accepted_requests.html', user = user, accepted_requests=accepted_requests)
     else:
         flash('Please log in to view accepted requests.')
         return redirect(url_for('login'))
@@ -170,10 +174,10 @@ def my_accepted_requests():
 
 
 
-
 @app.route('/answer_request/<int:request_id>', methods=['GET'])
 def answer_request(request_id):
     request = Request.query.get(request_id)
+    
     if not request:
         flash('Request not found.')
         return redirect(url_for('dashboard'))
