@@ -8,27 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/accepted.css') }}">
 </head>
 <body>
-<<<<<<< HEAD
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
-=======
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
->>>>>>> Ethan-branch
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
@@ -39,11 +23,7 @@
             </div>
         </div>
     </nav>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> Ethan-branch
     <div class="container mt-5">
         <h1>My Accepted Requests</h1>
         <ul class="list-group">
