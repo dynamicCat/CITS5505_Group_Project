@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Avatar</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Search and Select Your New Avatar</h2>
+        <form action="{{ url_for('search_avatar') }}" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="image_search" placeholder="Search for images">
+                <button type="submit" class="btn btn-primary mt-3" name="submit_search">Search</button>
+            </div>
+        </form>
+        {% if images %}
+        <div class="row">
+            {% for image in images %}
+            <div class="col-md-4">
+                <img src="{{ image.src.medium }}" alt="Image" class="img-fluid">
+                <a href="{{ url_for('set_avatar', image_url=image.src.medium) }}" class="btn btn-success">Set as Avatar</a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
