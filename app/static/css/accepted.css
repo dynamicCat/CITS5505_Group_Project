@@ -1,0 +1,144 @@
+/* accepted.css */
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style-type: disc;
+    margin-bottom: .25rem;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+.navbar-toggler {
+    order: 2;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .navbar-brand {
+    float:left;
+}
+
+.navbar-collapse {
+    padding-top:10px;
+    order: 3;
+}
+
+.navbar-nav li {
+    list-style-type: none;
+}
+
+.navbar-nav li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.container {
+    width: 100%;
+    max-width: 960px;
+    height:50px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.navbar {
+    background-color: #f8f9fa !important;
+}
+
+.navbar-expand-lg {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+}
+
+.navbar-light.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+.navbar-brand {
+    padding-top:25px;
+    float:left;
+    font-weight: bold;
+}
+
+.navbar-toggler {
+    border-color: #007bff;
+}
+
+.navbar-nav {
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+
+.nav-link {
+    color: #007bff;
+}
+
+
+.container {
+    width: 100%;
+    max-width: 960px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.list-group {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
