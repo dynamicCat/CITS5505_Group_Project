@@ -15,6 +15,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                    {% if session.get('username') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
@@ -25,6 +30,7 @@
             </div>
         </div>
     </nav>
+    
     <div class="container mt-5">
         <!-- User welcome message -->
         <div class="jumbotron">
@@ -48,7 +54,11 @@
             {% if requests %}
             <ul class="list-group">
                 {% for request in requests %}
-                <li class="list-group-item">{{ request.title }} - {{ request.description }}</li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('request_details', request_id=request.id) }}">
+                        {{ request.title }} - {{ request.description }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
             {% else %}
@@ -62,7 +72,11 @@
             {% if responses %}
             <ul class="list-group">
                 {% for response in responses %}
-                <li class="list-group-item">{{ response.response_text }}</li>
+                <li class="list-group-item">
+                    <a href="{{ url_for('request_details', request_id=response.request_id) }}">
+                        {{ response.response_text }}
+                    </a>
+                </li>
                 {% endfor %}
             </ul>
             {% else %}
