@@ -11,13 +11,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
@@ -25,8 +21,7 @@
                         <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
                     </li>
@@ -37,10 +32,6 @@
             </div>
         </div>
     </nav>
-    
-
-
-
     <div class="container mt-5">
         <h1>Search Requests</h1>
         <form action="{{ url_for('search_requests') }}" method="GET">
@@ -65,7 +56,5 @@
             </div>
         {% endif %}
     </div>
-
-
 </body>
 </html>
