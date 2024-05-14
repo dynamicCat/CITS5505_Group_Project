@@ -54,7 +54,8 @@ def dashboard():
         if user:
             user_requests = Request.query.filter_by(user_id=user_id).all()
             user_responses = Response.query.filter_by(user_id=user_id).all()
-            return render_template('dashboard.html', user=user, requests=user_requests, responses=user_responses)
+            accepted_requests = user.accepted_requests 
+            return render_template('dashboard.html', user=user, requests=user_requests, responses=user_responses, accepted_requests=accepted_requests)
         else:
             flash('User not found')
             return redirect(url_for('login'))

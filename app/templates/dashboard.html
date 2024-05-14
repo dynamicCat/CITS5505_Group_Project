@@ -4,87 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Dashboard</title>
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
-                    </li>
-                </ul>
+    <header id="header">
+        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                {% if session.get('username') %}
+                <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('search_requests') }}">Search Requests</a></li>
+                <li><a href="{{ url_for('create_request') }}">Create Request</a></li>
+                <li><a href="{{ url_for('logout') }}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- User Profile Sidebar -->
+        <div class="profile-sidebar">
+            <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="user profile" class="profile-image">
+            <h2>{{ user.username }}</h2>
+            <p class="lead">This is your personal dashboard where you can view and manage your requests and responses.</p>
+            <hr>
+            <p class="lead">Use the buttons below to create a new request or search other request.</p>
+            <div class="profile-actions">
+                <a class="btn" href="{{ url_for('create_request') }}" role="button">Create Request</a>
+                <a class="btn" href="{{ url_for('search_requests') }}" role="button">Search Requests</a>
             </div>
         </div>
-    </nav>
-    
-    <div class="container mt-5">
-        <!-- User welcome message -->
-        <div class="jumbotron">
-            <h1 class="display-4">Hello, {{ user.username }}!</h1>
-            <p class="lead">This is your personal dashboard where you can view and manage your requests and responses.</p>
-            <hr class="my-4">
-            <p>Use the buttons below to create a new request or search other request.</p>
-            <a class="btn btn-primary btn-lg" href="{{ url_for('create_request') }}" role="button">Create Request</a>
-            <a class="btn btn-info btn-lg" href="{{ url_for('search_requests') }}" role="button">Search Requests</a>
-            <a class="btn btn-secondary btn-lg" href="{{ url_for('my_accepted_requests') }}" role="button">My Accepted Requests</a>
-            <!-- <a class="btn btn-secondary btn-lg" href="{{ url_for('logout') }}" role="button">sign out</a>-->
-        </div>
 
-
-
-
+        <!-- Content Panel with Tabs -->
+        <div class="content-panel">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-button active" onclick="switchTab('tab1')">My Requests</button>
+                <button class="tab-button" onclick="switchTab('tab2')">My Responses</button>
+                <button class="tab-button" onclick="switchTab('tab3')">My Accepted Requests</button>
+            </div>
         
-        <!-- User request -->
-        <div class="mb-5">
-            <h2>My requests</h2>
-            {% if requests %}
-            <ul class="list-group">
-                {% for request in requests %}
-                <li class="list-group-item">
-                    <a href="{{ url_for('request_details', request_id=request.id) }}">
-                        {{ request.title }} - {{ request.description }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No requests yet.</p>
-            {% endif %}
-        </div>
-
-        <!-- User response -->
-        <div class="mb-5">
-            <h2>My responses</h2>
-            {% if responses %}
-            <ul class="list-group">
-                {% for response in responses %}
-                <li class="list-group-item">
-                    <a href="{{ url_for('request_details', request_id=response.request_id) }}">
-                        {{ response.response_text }}
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No response yet.</p>
-            {% endif %}
-        </div>
-    
-
-
+            <!-- Tab Content -->
+            <div id="tab1" class="tab-content active">
+                <div>
+                    <h2>My Requests</h2>
+                    {% if requests %}
+                    <ul class="list-group">
+                        {% for request in requests %}
+                        <a href="{{ url_for('request_details', request_id=request.id) }}">
+                            <li class="list-group-item">
+                                <p>Title: {{ request.title }} </p>
+                                <p>Description: {{ request.description }}</p>
+                            </li>
+                        </a>
+                        
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No request yet.</p>
+                    {% endif %}
+                </div>
+            </div>
         
+            <div id="tab2" class="tab-content">
+                <div>
+                    <h2>My Responses</h2>
+                    {% if responses %}
+                    <ul class="list-group">
+                        {% for response in responses %}
+                        <a href="{{ url_for('request_details', request_id=response.request_id) }}">
+                            <li class="list-group-item">
+                                <p>My response for this request: {{ response.response_text }} </p>
+                            </li>
+                        </a>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No response yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        
+            <div id="tab3" class="tab-content">
+                <div>
+                    <h2>My Accepted Requests</h2>
+                    {% if accepted_requests %}
+                    <ul class="list-group">
+                        {% for request in accepted_requests %}
+                        <li class="list-group-item">
+                            <p>Title: {{ request.title }} </p>
+                            <a href="{{ url_for('answer_request', request_id=request.id) }}" class="my-btn">Answer</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No response yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
 </body>
+</html>
