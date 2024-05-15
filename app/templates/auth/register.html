@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
@@ -12,23 +12,22 @@
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 </head>
-
 <body>
     <header id="header">
-        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
         <nav id="nav">
             <ul>
-                <li><a href="{{ url_for('register') }}" class="button">Sign Up</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class="button">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="container">
         <div class="login-container">
-            <img src="{{ url_for('static', filename='images/login_page_img.jpg') }}" alt="Login Image" class="login-image">
+            <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="Register Image" class="login-image">
             <div class="login-form">
-                <h1>Login</h1>
-                
+                <h1>Register</h1>
+            
                 {% for message in get_flashed_messages(category_filter=['error', 'success']) %}
                 <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }} custom-alert">
                     {{ message }}
@@ -39,8 +38,7 @@
                 {% endfor %}
 
 
-
-                <form method="POST" action="{{ url_for('login') }}">
+                <form method="POST" action="{{ url_for('auth.register') }}">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
                         {{ form.username.label(class="form-label") }}
@@ -50,13 +48,13 @@
                         {{ form.password.label(class="form-label") }}
                         {{ form.password(class="form-control") }}
                     </div>
-                    <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
+                    <button type="submit" class="btn btn-primary">Create New User</button>
                 </form>
+
 
             </div>
         </div>
     </div>
 </body>
 </html>
-

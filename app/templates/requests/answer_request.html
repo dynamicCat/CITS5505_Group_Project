@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer Request</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .navbar-avatar {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-right: 10px; 
+        }
+    </style>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -12,7 +23,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,14 +31,14 @@
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +65,7 @@
         {% endif %}
         
         <!-- Optionally include a form for the current user to submit a response -->
-        <form action="{{ url_for('submit_answer', request_id=request.id) }}" method="POST">
+        <form action="{{ url_for('requests.submit_answer', request_id=request.id) }}" method="POST">
             <div class="form-group">
                 <label for="response">Your Response:</label>
                 <textarea class="form-control" id="response" name="response" rows="3" required></textarea>

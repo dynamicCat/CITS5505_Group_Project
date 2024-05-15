@@ -4,37 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Requests</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .navbar-avatar {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-right: 10px; 
+        }
+    </style>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.9/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                    <li class="nav-item align-items-center d-flex">
+                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+
+                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}
-                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    
+
+
+
     <div class="container mt-5">
         <h1>Search Requests</h1>
-        <form action="{{ url_for('search_requests') }}" method="GET">
+        <form action="{{ url_for('requests.search_requests') }}" method="GET">
             <div class="form-group">
                 <input type="text" class="form-control" name="query" placeholder="Type to search for requests...">
                 <button type="submit" class="btn btn-primary mt-3">Search</button>
@@ -44,7 +62,7 @@
         {% if search_results %}
             <div class="list-group">
                 {% for request in search_results %}
-                    <a href="{{ url_for('request_details', request_id=request.id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <a href="{{ url_for('requests.request_details', request_id=request.id) }}" class="list-group-item list-group-item-action flex-column align-items-start">
                         <h5 class="mb-1">{{ request.title }}</h5>
                         <p class="mb-1">{{ request.description }}</p>
                     </a>
@@ -56,5 +74,7 @@
             </div>
         {% endif %}
     </div>
+
+
 </body>
 </html>

@@ -5,26 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Details</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .navbar-avatar {
+            width: 40px; 
+            height: 40px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            margin-right: 10px; 
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     {% if session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">{{ session['username'] }}</a>
+                    <li class="nav-item align-items-center d-flex">
+                        <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+
+                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -67,7 +78,7 @@
 </ul>
 
       
-        <a href="{{ url_for('accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
+        <a href="{{ url_for('requests.accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
 
         
     </div>

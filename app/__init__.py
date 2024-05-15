@@ -3,17 +3,32 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
 
+db = SQLAlchemy()
+migrate = Migrate()
 
-app = Flask(__name__)
-app.config.from_object(Config)
+def create_app(config_class=Config):
+    app = Flask(__name__)
+    app.config.from_object(config_class)
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+    db.init_app(app)
+    migrate.init_app(app, db)
 
-# Import models and routes
-from .models import User, Request, Response, accepted_requests
-from .routes import *
+    from app.auth import bp as auth_blueprint
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
-if __name__ == '__main__':
-    app.run()
+    from app.dashboard import bp as dashboard_blueprint
+    app.register_blueprint(dashboard_blueprint, url_prefix='/dashboard')
+
+    from app.requests import bp as requests_blueprint
+    app.register_blueprint(requests_blueprint, url_prefix='/requests')
+
+    from app.profile import bp as profile_blueprint
+    app.register_blueprint(profile_blueprint, url_prefix='/profile')
+
+    from .main import bp as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app
+
+
 

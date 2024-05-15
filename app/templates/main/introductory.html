@@ -15,13 +15,13 @@
 </head>
 <body>
     <header id="header">
-        <h1><a href="{{ url_for('home') }}">RequestHub</a></h1>
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
         <nav id="nav">
             <ul>
                 <li><a href="#banner">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#function">Function</a></li>
-                <li><a href="{{ url_for('login') }}" class="button">Login</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class="button">Login</a></li>
             </ul>
         </nav>
     </header>
@@ -31,8 +31,8 @@
             <h2>Welcome to RequestHub</h2>
             <p>Get started by either logging in to your existing account or creating a new one to explore the possibilities</p>
             <ul class="actions">
-                <li><a href="{{ url_for('register') }}" class="button special">Sign Up</a></li>
-                <li><a href="{{ url_for('login') }}" class="button alt">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}" class="button special">Sign Up</a></li>
+                <li><a href="{{ url_for('auth.login') }}" class="button alt">Login</a></li>
             </ul>
         </div>
     </section>

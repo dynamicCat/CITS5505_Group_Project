@@ -21,7 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,10 +35,10 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -46,7 +46,7 @@
     </nav>
     <div class="container mt-5">
         <h2>Update Your Profile</h2>
-        <form action="{{ url_for('update_profile') }}" method="post">
+        <form action="{{ url_for('profile.update_profile') }}" method="post">
             {{ form.hidden_tag() }}
             <div class="form-group">
                 {{ form.username.label(class="form-label") }}
@@ -60,7 +60,7 @@
                 {{ form.submit_update(class="btn btn-primary") }}
             </div>
         </form>
-        <a href="{{ url_for('search_avatar') }}" class="btn btn-secondary">Update Avatar</a>
+        <a href="{{ url_for('profile.search_avatar') }}" class="btn btn-secondary">Update Avatar</a>
         <div>
             <h3>Your current avatar:</h3>
             <img src="{{ user.avatar_url }}" alt="Your Avatar" class="img-thumbnail">
@@ -68,4 +68,3 @@
     </div>
 </body>
 </html>
-

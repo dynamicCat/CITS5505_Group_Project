@@ -19,7 +19,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard') }}">RequestHub</a>
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -33,10 +33,10 @@
                     </li>
                     {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -44,7 +44,7 @@
     </nav>
     <div class="container mt-5">
         <h2>Search and Select Your New Avatar</h2>
-        <form action="{{ url_for('search_avatar') }}" method="post">
+        <form action="{{ url_for('profile.search_avatar') }}" method="post">
             <div class="form-group">
                 <input type="text" class="form-control" name="image_search" placeholder="Search for images">
                 <button type="submit" class="btn btn-primary mt-3" name="submit_search">Search</button>
@@ -55,7 +55,7 @@
             {% for image in images %}
             <div class="col-md-4">
                 <img src="{{ image.src.medium }}" alt="Image" class="img-fluid">
-                <a href="{{ url_for('set_avatar', image_url=image.src.medium) }}" class="btn btn-success">Set as Avatar</a>
+                <a href="{{ url_for('profile.set_avatar', image_url=image.src.medium) }}" class="btn btn-success">Set as Avatar</a>
             </div>
             {% endfor %}
         </div>
