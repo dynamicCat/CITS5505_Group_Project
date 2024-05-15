@@ -54,7 +54,7 @@
         <h1>Search Requests</h1>
         <form action="{{ url_for('requests.search_requests') }}" method="GET">
             <div class="form-group">
-                <input type="text" class="form-control" name="query" placeholder="Type to search for requests...">
+                <input type="text" class="form-control" name="query" placeholder="Type to search for requests..." value="{{ request.args.get('query', '') }}">
                 <button type="submit" class="btn btn-primary mt-3">Search</button>
             </div>
         </form>
@@ -68,7 +68,7 @@
                     </a>
                 {% endfor %}
             </div>
-        {% else %}
+        {% elif request.args.get('query') %}
             <div class="alert alert-info" role="alert">
                 No requests found. Please try a different search query.
             </div>
