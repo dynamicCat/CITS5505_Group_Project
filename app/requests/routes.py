@@ -15,7 +15,7 @@ def create_request():
             new_request = Request(title=title, description=description, user_id=user_id)
             db.session.add(new_request)
             db.session.commit()
-            flash('Request created successfully.')
+            flash('Request created successfully.','success')
             return redirect(url_for('dashboard.dashboard'))
         else:
             flash('Please fill all the fields.')
