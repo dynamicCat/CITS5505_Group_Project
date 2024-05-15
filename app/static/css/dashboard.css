@@ -9,7 +9,7 @@ a {
 }
 
 .profile-sidebar {
-    width: 30%; 
+    width: 25%; 
     background-color: #0e005c;
     color: white;
     padding: 20px;
@@ -23,7 +23,7 @@ a {
 }
 
 .content-panel {
-    width: 70%; 
+    width: 65%; 
     padding: 20px;
     background-color: #cae2f9;
     border-radius: 8px;
@@ -59,10 +59,11 @@ h2 {
     border-radius: 0.25rem;
     border: none;
     font-size: 1.2em;
-    margin: 10px auto; 
     background-color: #e1f0ff;
     transition: background-color 0.3s ease;
     color: black;
+    margin-top: 30px;
+    margin-bottom: 25px;
 }
 
 
@@ -86,11 +87,13 @@ h2 {
     background-color: #e9ecef;
     max-width: 80px;
     text-align: center;
+    border-radius: 0.25rem;
     transition: background-color 0.3s ease;
 }
 
 .my-btn:hover {
-    background-color: #dde;
+    background-color: #0e005c;
+    color: white;
 }
 
 .tab-button {
@@ -131,7 +134,7 @@ h2 {
 .list-group {
     list-style: none;
     padding: 0;
-    width: 100%;
+    width: 100;
 }
 
 .list-group-item {
@@ -140,10 +143,6 @@ h2 {
     border-radius: 8px;
     margin-bottom: 10px;
     overflow: hidden;
-    display: block;
-    text-decoration: none;
-    height: 90px;
-    text-overflow: ellipsis; 
     transition: background-color 0.3s ease;
 }
 
@@ -159,6 +158,9 @@ h2 {
 
 .list-group-item p {
     margin: 5px 0; 
-    max-width: 90%; 
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    max-width: 90%;
     color: white;
 }
