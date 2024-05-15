@@ -24,13 +24,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item align-items-center d-flex">
-                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-
-                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
@@ -44,26 +37,18 @@
     
     <div class="container mt-5">
         <h1>Create a New Request</h1>
-        <form action="/create_request" method="POST">
+        <form action="{{ url_for('requests.create_request') }}" method="POST">
+            {{ form.hidden_tag() }}
             <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe your request" required></textarea>
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
             </div>
-            <button type="submit" class="btn btn-primary">Submit Request</button>
+            <button type="submit" class="btn btn-primary">{{ form.submit.label.text }}</button>
         </form>
-        <hr>
-        <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
     </div>
 </body>
 </html>
-
-
-
-
-
-
-

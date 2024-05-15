@@ -2,24 +2,23 @@ from flask import render_template, request, redirect, url_for, flash, session
 from app.models import db, User, Request, Response
 from . import bp as requests_bp
 from flask_login import login_required 
+from .forms import CreateRequestForm
+
 
 @requests_bp.route('/create_request', methods=['GET', 'POST'])
 def create_request():
-    user_id = session.get('user_id')
-    user = User.query.get(user_id)
-    if request.method == 'POST':
-        title = request.form.get('title')
-        description = request.form.get('description')
-        
-        if user_id and title and description:
-            new_request = Request(title=title, description=description, user_id=user_id)
-            db.session.add(new_request)
-            db.session.commit()
-            flash('Request created successfully.','success')
-            return redirect(url_for('dashboard.dashboard'))
-        else:
-            flash('Please fill all the fields.')
-    return render_template('requests/create_request_form.html', user = user)
+    form = CreateRequestForm()
+    if form.validate_on_submit():
+        new_request = Request(
+            title=form.title.data,
+            description=form.description.data,
+            user_id=session['user_id']
+        )
+        db.session.add(new_request)
+        db.session.commit()
+        flash('Request created successfully.', 'success')
+        return redirect(url_for('dashboard.dashboard'))
+    return render_template('requests/create_request_form.html', form=form)
 
 @requests_bp.route('/search_requests', methods=['GET'])
 def search_requests():
