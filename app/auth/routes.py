@@ -19,7 +19,7 @@ def login():
             session['avatar_url'] = user.avatar_url
             return redirect(url_for('dashboard.dashboard'))
         else:
-            flash('Invalid username or password')
+            flash('Invalid username or password', 'error')
     return render_template('auth/login.html', form=form)
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
