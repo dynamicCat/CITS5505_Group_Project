@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Request</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
     <style>
         .navbar-avatar {
             width: 40px; 
@@ -16,33 +17,27 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item align-items-center d-flex">
-                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-
-                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <header id="header">
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                {% if session.get('username') %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
+                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                {% if session.get('username') %}
+                <li>
+                    <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
+                </li>
+                {% endif %}
+                <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
     
-    <div class="container mt-5">
+    <div class="container">
         <h1>Create a New Request</h1>
         <form action="/create_request" method="POST">
             <div class="form-group">
@@ -53,17 +48,11 @@
                 <label for="description">Description</label>
                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Describe your request" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit Request</button>
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+                <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
         </form>
-        <hr>
-        <a href="{{ url_for('dashboard.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
     </div>
 </body>
 </html>
-
-
-
-
-
-
-
