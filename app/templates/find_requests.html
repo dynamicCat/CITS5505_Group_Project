@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Details</title>
+    <title>Search Requests</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
@@ -31,47 +31,22 @@
         </div>
     </nav>
     
-    
     <div class="container mt-5">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-    
+        <h1>Search Requests</h1>
         
-        <h1>{{ request.title }}</h1>
-        <p><strong>Description:</strong> {{ request.description }}</p>
-
-        <h2>Accepted by:</h2>
-        <ul>{% for user in request.accepted_by %}
-            <li>{{ user.username }}</li>
-            {% endfor %}
-        </ul>
-<!-- Display accepted responses -->
-<h2>Accepted Responses:</h2>
-<ul class="list-group">
-    {% for response in accepted_responses %}
-        <li class="list-group-item">
-            <strong>{{ response.responder.username }}:</strong>
-            <p>{{ response.response_text }}</p>
-        </li>
-    {% endfor %}
-</ul>
-
-      
-        <a href="{{ url_for('accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
-
+        <form action="/search_requests" method="GET">
+            
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Search for requests...">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <hr>
+        <!-- Results will be dynamically populated here -->
+        <div id="searchResults"></div>
         
     </div>
+    <hr>
+   
 </body>
-</html>
-
 </html>
