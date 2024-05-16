@@ -4,13 +4,16 @@ from . import bp as auth_bp
 from app.models import User
 from .forms import LoginForm, RegistrationForm
 from app import db
-
+#from flask_login import current_user
 
 
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
+    #if current_user.is_authenticated:
+    #    return redirect(url_for('dashboard.dashboard'))
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):

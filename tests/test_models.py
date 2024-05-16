@@ -24,6 +24,13 @@ class TestModels(unittest.TestCase):
        self.assertIsNotNone(user.id)
        self.assertTrue(user.check_password('test')) 
 
+    def test_password_hashing(self):
+        u = models.User(username='john')
+        u.set_password('cat')
+        self.assertFalse(u.check_password('dog'))
+        self.assertTrue(u.check_password('cat'))
+    
+
 if __name__ == '__main__':
     unittest.main()
 
