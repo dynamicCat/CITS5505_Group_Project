@@ -2,7 +2,9 @@
 body, html {
   margin: 0;
   padding: 0;
+  background-color: #cae2f9; /* Light blue background */
 }
+
 ul, ol {
   list-style: none;
   padding: 0;
@@ -13,8 +15,11 @@ ul, ol {
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 5rem auto; /* Center the form vertically */
   padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
 /* Navbar styles */
@@ -24,7 +29,7 @@ ul, ol {
 }
 
 .navbar-brand {
-  float:left;
+  float: left;
   font-size: 24px;
   font-weight: bold;
   color: #007bff;
@@ -33,7 +38,7 @@ ul, ol {
 
 .navbar-nav {
   display: flex;
-  float:right;
+  float: right;
   align-items: center;
 }
 
@@ -67,9 +72,12 @@ textarea.form-control {
   resize: vertical;
 }
 
+/* Button styles */
 .btn {
   padding: 10px 20px;
   border-radius: 5px;
+  font-size: 16px; /* Uniform font size */
+  font-weight: 600; /* Uniform font weight */
 }
 
 .btn-primary {
@@ -86,10 +94,18 @@ textarea.form-control {
 .btn-secondary {
   background-color: #6c757d;
   border: 1px solid #6c757d;
-  color: #ffffff; /* 白色 */
+  color: #ffffff;
 }
 
 .btn-secondary:hover {
   background-color: #5a6268;
   border-color: #5a6268;
+}
+
+/* Button group styles */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
 }
