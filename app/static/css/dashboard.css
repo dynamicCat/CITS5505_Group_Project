@@ -164,3 +164,24 @@ h2 {
     max-width: 90%;
     color: white;
 }
+
+.answer-btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white; /* Change text color to white */
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.answer-btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+    color: white; /* Ensure text color stays white on hover */
+}
+

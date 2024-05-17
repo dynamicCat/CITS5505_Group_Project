@@ -1,144 +1,163 @@
-/* accepted.css */
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-    list-style-type: disc;
-    margin-bottom: .25rem;
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #cae2f9; /* Light blue background */
 }
 
-a {
-    color: #007bff;
-    text-decoration: none;
-    background-color: transparent;
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-a:hover {
-    color: #0056b3;
-}
-
-.navbar-toggler {
-    order: 2;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav .navbar-brand {
-    float:left;
-}
-
-.navbar-collapse {
-    padding-top:10px;
-    order: 3;
-}
-
-.navbar-nav li {
-    list-style-type: none;
-}
-
-.navbar-nav li a {
-    text-decoration: none;
-    color: inherit;
-}
-
+/* Basic styles for the container */
 .container {
-    width: 100%;
-    max-width: 960px;
-    height:50px;
-    margin-right: auto;
-    margin-left: auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 5rem auto; /* Center the form vertically */
+  padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
-.mt-5 {
-    margin-top: 3rem !important;
-}
-
-.navbar {
-    background-color: #f8f9fa !important;
-}
-
-.navbar-expand-lg {
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-}
-
-.navbar-light.bg-light {
-    background-color: #f8f9fa !important;
-}
-
-.navbar-brand {
-    padding-top:25px;
-    float:left;
-    font-weight: bold;
-}
-
-.navbar-toggler {
-    border-color: #007bff;
-}
-
-.navbar-nav {
-    margin-right: 10px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.nav-item {
-    margin-right: 10px;
-}
-
-.nav-link {
-    color: #007bff;
-}
-
-
-.container {
-    width: 100%;
-    max-width: 960px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.mt-5 {
-    margin-top: 3rem !important;
-}
-
+/* List group styles */
 .list-group {
-    display: flex;
-    flex-direction: column;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 
 .list-group-item {
-    position: relative;
-    display: block;
-    padding: .75rem 1.25rem;
-    margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125);
+  position: relative;
+  display: block;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 10px; /* Add space between items */
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: 8px; /* Rounded corners */
 }
 
+.request-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.request-details {
+  max-width: 80%;
+}
+
+.list-group-item-action {
+  width: 100%;
+  color: #495057;
+  text-align: inherit;
+  border-bottom: 1px solid rgba(0, 0, 0, .125);
+}
+
+.flex-column {
+  flex-direction: column !important;
+}
+
+.align-items-start {
+  align-items: flex-start !important;
+}
+
+.mt-5 {
+  margin-top: 5rem !important;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+/* Button styles */
 .btn {
-    display: inline-block;
-    font-weight: 400;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    background-color: #007bff;
-    border: 1px solid #007bff;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px; /* Uniform font size */
+  font-weight: 600; /* Uniform font weight */
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #ffffff;
+  margin-top: 10px; /* Add this line to move the button down */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: #ffffff;
+  margin-top: 20px; /* Add this line to move the button down */
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Button group styles */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 20px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align button to the right */
+  margin-left: auto; /* Add this line to align button to the right */
+}
+
+/* Ensure the list group does not overflow horizontally */
+.list-group {
+  max-height: 440px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  border-radius: 8px; /* Ensure rounded corners */
+}
+
+/* Ensure list items are styled similarly to the dashboard items */
+.list-group-item {
+  background-color: #0e005c; /* Match the dashboard item background color */
+  padding: 10px 15px;
+  border-radius: 8px; /* Ensure rounded corners */
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.list-group-item:hover {
+  background-color: #094ea9ce; /* Darker blue on hover */
+}
+
+.list-group-item a {
+  color: inherit; /* Keep text color consistent */
+  text-decoration: none; /* Remove underline */
+}
+
+.list-group-item h5 {
+  font-size: 1.2rem; /* Adjust title font size */
+  margin: 0;
+  padding-bottom: 5px; /* Add some space below the title */
+}
+
+.list-group-item p {
+  font-size: 0.9rem; /* Adjust description font size */
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
