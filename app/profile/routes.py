@@ -55,5 +55,5 @@ def set_avatar():
         current_user.avatar_url = image_url
         db.session.commit()
         flash('Avatar updated successfully!', 'success')
-    return redirect(url_for('dashboard.dashboard'))
+    return redirect(url_for('profile.update_profile'))
 
