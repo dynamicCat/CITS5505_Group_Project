@@ -21,32 +21,25 @@
 </head>
 <body>
     <header id="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto">
-                        {% if current_user.is_authenticated %}
-                    <li class="nav-item align-items-center d-flex">
-                       
-                        <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
-                    </li>
-                    {% endif %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                {% if session.get('username') %}
+                {% endif %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
+                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item align-items-center d-flex">
+                    <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
+                </li>
+                {% endif %}
+                <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
+            </ul>
         </nav>
     </header>
+    
     <div class="container">
         <h1>Search Requests</h1>
         <form action="{{ url_for('requests.search_requests') }}" method="GET">

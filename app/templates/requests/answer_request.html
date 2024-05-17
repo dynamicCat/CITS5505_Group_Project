@@ -1,12 +1,11 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer Request</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/answer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
     <style>
         .navbar-avatar {
             width: 40px; 
@@ -21,57 +20,57 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if current_user.is_authenticated %}
+    <header id="header">
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                {% if session.get('username') %}
+                {% endif %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
+                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                {% if current_user.is_authenticated %}
                 <li class="nav-item align-items-center d-flex">
-                   
                     <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
                     <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
                 </li>
                 {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
+                <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="container mt-5">
         <h1>Request Details</h1>
-        <h2>{{ request.title }}</h2>
-        <p><strong>Description:</strong> {{ request.description }}</p>
-        
-        <h2>All Responses</h2>
-        {% if responses %}
-            <ul class="list-group">
-                {% for response in responses %}
-                    <li class="list-group-item">
-                        <img src="{{ response.responder.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                        <strong>{{ response.responder.username }}:</strong>
-                        <p>{{ response.response_text }}</p>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No responses yet.</p>
-        {% endif %}
+        <div class="request-details">
+            <h2>Request Title:</h2>
+            <p class="request-title-content">{{ request.title }}</p>
+            <h2>Description:</h2>
+            <p>{{ request.description }}</p>
+        </div>
+
+        <div class="accepted-details">
+            <h2>All Responses</h2>
+            {% if responses %}
+                <ul class="list-group accepted-responses">
+                    {% for response in responses %}
+                        <li class="list-group-item">
+                            <img src="{{ response.responder.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+                            <strong>{{ response.responder.username }}:</strong>
+                            <p>{{ response.response_text }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No responses yet.</p>
+            {% endif %}
+        </div>
         
         <!-- Optionally include a form for the current user to submit a response -->
         <form action="{{ url_for('requests.submit_answer', request_id=request.id) }}" method="POST">
             <div class="form-group">
-                <label for="response">Your Response:</label>
-                <textarea class="form-control" id="response" name="response" rows="3" required></textarea>
+                <label for="response" class="response-label">Your Response:</label>
+                <textarea class="form-control response-textarea" id="response" name="response" rows="3" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit Response</button>
         </form>

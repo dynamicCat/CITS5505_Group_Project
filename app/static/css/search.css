@@ -22,40 +22,6 @@ ul, ol {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
-/* Navbar styles */
-.navbar {
-  background-color: #f8f9fa;
-  padding: 10px 0;
-}
-
-.navbar-brand {
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  color: #007bff;
-  text-decoration: none;
-}
-
-.navbar-nav {
-  display: flex;
-  float: right;
-  align-items: center;
-}
-
-.navbar-nav .nav-item {
-  margin-right: 10px;
-}
-
-.nav-link {
-  color: #000000;
-  text-decoration: none;
-  font-size: 18px;
-}
-
-.nav-link:hover {
-  color: #007bff;
-}
-
 /* Form styles */
 .form-group {
   margin-bottom: 20px;
@@ -151,4 +117,49 @@ textarea.form-control {
   color: #0c5460;
   background-color: #d1ecf1;
   border-color: #bee5eb;
+}
+/* Adjust the input box width */
+.form-group input {
+  width: 60%; /* Adjust width as needed */
+}
+
+/* Ensure the list group does not overflow horizontally */
+.list-group {
+  max-height: 440px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  border-radius: 8px; /* Ensure rounded corners */
+}
+
+/* Ensure list items are styled similarly to the dashboard items */
+.list-group-item {
+  background-color: #0e005c; /* Match the dashboard item background color */
+  padding: 10px 15px;
+  border-radius: 8px; /* Ensure rounded corners */
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.list-group-item:hover {
+  background-color: #094ea9ce; /* Darker blue on hover */
+}
+
+.list-group-item a {
+  color: inherit; /* Keep text color consistent */
+  text-decoration: none; /* Remove underline */
+}
+
+.list-group-item h5 {
+  font-size: 1.2rem; /* Adjust title font size */
+  margin: 0;
+  padding-bottom: 5px; /* Add some space below the title */
+}
+
+.list-group-item p {
+  font-size: 0.9rem; /* Adjust description font size */
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

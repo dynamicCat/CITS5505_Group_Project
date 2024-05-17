@@ -115,10 +115,10 @@
                     {% if accepted_requests %}
                     <ul class="list-group">
                         {% for request in accepted_requests %}
-                        <li class="list-group-item">
+                        <li class="list-group-item" style="position: relative;">
                             <p>Title: {{ request.title }} </p>
                             <p>Description: {{ request.description }}</p>
-                            <a href="{{ url_for('requests.my_accepted_requests', request_id=request.id) }}" class="my-btn"></a>
+                            <a href="{{ url_for('requests.my_accepted_requests', request_id=request.id) }}" class="answer-btn">Answer</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -131,9 +131,6 @@
     </div>
 </body>
 </html>
-
-
-
 
 
 
