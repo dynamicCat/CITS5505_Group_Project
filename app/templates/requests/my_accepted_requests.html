@@ -24,13 +24,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item align-items-center d-flex">
-                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-
-                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
+                    {% if current_user.is_authenticated %}
+                <li class="nav-item align-items-center d-flex">
+                   
+                    <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
+                </li>
+                {% endif %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
                     </li>
