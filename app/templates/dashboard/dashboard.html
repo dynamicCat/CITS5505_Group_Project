@@ -8,20 +8,18 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
-    <style>
-        .navbar-avatar {
-            width: 40px; 
-            height: 40px;
-            border-radius: 50%; 
-            object-fit: cover; 
-            margin-right: 10px; 
-        }
-    </style>
+    
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/js.js') }}"></script>
 
 </head>
 <body>
+    <div id="burger">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+    </div>
+
     <header id="header">
         <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
         <nav id="nav">
@@ -29,14 +27,13 @@
                 {% if session.get('username') %}
                 <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
                 {% endif %}
-                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
-                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                <li><a href="{{ url_for('requests.search_requests') }}">Search</a></li>
+                <li><a href="{{ url_for('requests.create_request') }}">Create</a></li>
 
                 {% if current_user.is_authenticated %}
                 <li class="nav-item align-items-center d-flex">
                     <!-- Add a query string to the image URL to prevent caching -->
-                    <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}"><img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar"></a>
                 </li>
                 {% endif %}
                 <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
@@ -48,7 +45,7 @@
     <div class="container">
         <!-- User Profile Sidebar -->
         <div class="profile-sidebar">
-            <img src="{{ url_for('static', filename='images/register_page_img.jpg') }}" alt="user profile" class="profile-image">
+            <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="profile-image">
             <h2>{{ user.username }}</h2>
             <p class="lead">This is your personal dashboard where you can view and manage your requests and responses.</p>
             <hr>
