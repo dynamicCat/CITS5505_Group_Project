@@ -27,42 +27,32 @@ def search_pexels_images(query):
 @profile_bp.route('/update_profile', methods=['GET', 'POST'])
 @login_required
 def update_profile():
-    user = current_user
     form = UserProfileForm(obj=current_user)
-    
     if form.validate_on_submit():
         form.populate_obj(current_user)
         db.session.commit()
         flash('Your profile has been updated!', 'success')
         return redirect(url_for('profile.update_profile'))
-    return render_template('profile/update_profile.html', form=form, user = user)
-
+    return render_template('profile/update_profile.html', form=form, user=current_user)
 
 @profile_bp.route('/search_avatar', methods=['GET', 'POST'])
 @login_required
 def search_avatar():
-    form = UserProfileForm()  # May need to modify or use a different form to accommodate image-only searches
-    user = User.query.get_or_404(session['user_id'])
-
+    form = UserProfileForm()  # Consider modifying or using a different form if necessary
     if request.method == 'POST' and 'submit_search' in request.form:
         images = search_pexels_images(form.image_search.data)
         if images:
-            return render_template('profile/search_avatar.html', form=form, images=images, user=user)
+            return render_template('profile/search_avatar.html', form=form, images=images, user=current_user)
         else:
             flash('No images found. Try another search.', 'error')
-
-    return render_template('profile/search_avatar.html', form=form, user=user)
-
-
+    return render_template('profile/search_avatar.html', form=form, user=current_user)
 
 @profile_bp.route('/set_avatar')
 @login_required
 def set_avatar():
     image_url = request.args.get('image_url')
-    user_id = session['user_id']
-    user = User.query.get(user_id)
-    if user:
-        user.avatar_url = image_url
+    if current_user:
+        current_user.avatar_url = image_url
         db.session.commit()
         flash('Avatar updated successfully!', 'success')
     return redirect(url_for('dashboard.dashboard'))
