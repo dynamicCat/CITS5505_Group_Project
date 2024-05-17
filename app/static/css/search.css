@@ -152,3 +152,48 @@ textarea.form-control {
   background-color: #d1ecf1;
   border-color: #bee5eb;
 }
+/* Adjust the input box width */
+.form-group input {
+  width: 60%; /* Adjust width as needed */
+}
+
+/* Ensure the list group does not overflow horizontally */
+.list-group {
+  max-height: 440px; /* Adjust height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+  border-radius: 8px; /* Ensure rounded corners */
+}
+
+/* Ensure list items are styled similarly to the dashboard items */
+.list-group-item {
+  background-color: #0e005c; /* Match the dashboard item background color */
+  padding: 10px 15px;
+  border-radius: 8px; /* Ensure rounded corners */
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+.list-group-item:hover {
+  background-color: #094ea9ce; /* Darker blue on hover */
+}
+
+.list-group-item a {
+  color: inherit; /* Keep text color consistent */
+  text-decoration: none; /* Remove underline */
+}
+
+.list-group-item h5 {
+  font-size: 1.2rem; /* Adjust title font size */
+  margin: 0;
+  padding-bottom: 5px; /* Add some space below the title */
+}
+
+.list-group-item p {
+  font-size: 0.9rem; /* Adjust description font size */
+  margin: 5px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

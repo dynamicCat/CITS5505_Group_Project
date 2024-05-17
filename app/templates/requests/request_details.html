@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Request Details</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/request.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
     <style>
         .navbar-avatar {
             width: 40px; 
@@ -16,33 +17,25 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    {% if session.get('username') %}
-                    <li class="nav-item align-items-center d-flex">
-                        <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-
-                        <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    
-    
+    <header id="header">
+        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
+        <nav id="nav">
+            <ul>
+                {% if session.get('username') %}
+                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
+                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                {% if session.get('username') %}
+                <li>
+                    <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ session['username'] }}</a>
+                </li>
+                {% endif %}
+                <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
     <div class="container mt-5">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -56,33 +49,29 @@
             {% endfor %}
         {% endif %}
         {% endwith %}
-    
-        
-        <h1>{{ request.title }}</h1>
-        <p><strong>Description:</strong> {{ request.description }}</p>
 
-        <h2>Accepted by:</h2>
-        <ul>{% for user in request.accepted_by %}
-            <li>{{ user.username }}</li>
+        <div class="request-details">
+            <h1>{{ request.title }}</h1>
+            <p><strong>Description:</strong> {{ request.description }}</p>
+
+            <h2>Accepted by:</h2>
+            <ul>{% for user in request.accepted_by %}
+                <li>{{ user.username }}</li>
             {% endfor %}
-        </ul>
-<!-- Display accepted responses -->
-<h2>Accepted Responses:</h2>
-<ul class="list-group">
-    {% for response in accepted_responses %}
-        <li class="list-group-item">
-            <strong>{{ response.responder.username }}:</strong>
-            <p>{{ response.response_text }}</p>
-        </li>
-    {% endfor %}
-</ul>
+            </ul>
 
-      
-        <a href="{{ url_for('requests.accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
+            <h2>Accepted Responses:</h2>
+            <ul class="list-group">
+                {% for response in accepted_responses %}
+                    <li class="list-group-item">
+                        <strong>{{ response.responder.username }}:</strong>
+                        <p>{{ response.response_text }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
 
-        
+            <a href="{{ url_for('requests.accept_request', request_id=request.id) }}" class="btn btn-success">Accept Request</a>
+        </div>
     </div>
 </body>
-</html>
-
 </html>

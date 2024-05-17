@@ -1,0 +1,161 @@
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #cae2f9; /* Light blue background */
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Basic styles for the container */
+.container {
+  width: 90%; /* Make the container wider */
+  max-width: 1200px;
+  margin: 5rem auto; /* Center the form vertically */
+  padding: 20px;
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #f8f9fa;
+  padding: 10px 0;
+}
+
+.navbar-brand {
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.navbar-nav {
+  display: flex;
+  float: right;
+  align-items: center;
+}
+
+.navbar-nav .nav-item {
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: #000000;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Form styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.search-input {
+  width: 300px; /* Adjust width to make space for the search button */
+  display: inline-block;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+/* Button styles */
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px; /* Uniform font size */
+  font-weight: 600; /* Uniform font weight */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  color: #ffffff;
+  margin-top: 10px; /* Add this line to move the button down */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: 1px solid #6c757d;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: 1px solid #28a745;
+  color: #ffffff;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+/* Image grid styles */
+.image-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Reduce the gap between image items */
+  margin-top: 20px;
+}
+
+.image-item {
+  flex: 1 1 calc(33.333% - 20px); /* Three items per row with 10px gap */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-container {
+  width: 180px; /* Set width */
+  height: 180px; /* Set height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Background color for image container */
+  border: 1px solid #ced4da;
+  border-radius: 8px; /* Ensure rounded corners */
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure image covers the container */
+}
+
+/* Search results container */
+.search-results {
+  max-height: 600px; /* Set the height limit for search results */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding to avoid content hidden by scrollbar */
+}

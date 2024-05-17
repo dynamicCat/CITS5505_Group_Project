@@ -1,6 +1,8 @@
+/* Removes underlines globally */
 a {
-    text-decoration: none; /* Removes underlines globally */
+    text-decoration: none;
 }
+
 /* Header Styling */
 #header {
     background: #ffffff;
@@ -45,6 +47,8 @@ a {
     list-style: none;
     margin: 0;
     padding-left: 0;
+    display: flex;
+    align-items: center;
 }
 
 #header nav > ul > li {
@@ -68,7 +72,7 @@ a {
 #header nav > ul > li a:hover {
     text-decoration: underline; 
     color: #4169E1;
-    letter-spacing:1.5px;
+    letter-spacing: 1.5px;
 }
 
 #header nav > ul > li .button {
@@ -77,12 +81,10 @@ a {
     text-decoration: none;
     background-color: #00008B; 
     color: white;
-    padding: 8px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 8px 16px;
     border-radius: 10px;
-    box-shadow: 0px 2px 6px rgba( 0, 0, 0, 0.75 );
-    transition: 0.5s ;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.75);
+    transition: 0.5s;
 }
 
 #header nav > ul > li .button:hover {
@@ -91,7 +93,23 @@ a {
     text-decoration: none;
 }
 
-/* footer styling */
+/* Aligning avatar image */
+.navbar-avatar {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+/* Centering the text vertically with the avatar image */
+.nav-item {
+    display: flex;
+    align-items: center;
+}
+
+/* Footer Styling */
 footer {
     background-color: #f6f6e6; 
     color: #333; 
