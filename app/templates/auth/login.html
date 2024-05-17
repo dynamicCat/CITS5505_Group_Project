@@ -30,7 +30,7 @@
                 <h1>Login</h1>
                 
                 {% for message in get_flashed_messages(category_filter=['error', 'success']) %}
-                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }} custom-alert">
+                <div class="alert alert-{{ 'success' if 'successful' in message else 'danger' }} custom-alert" >
                     {{ message }}
                     <button type="button" class="custom-close" aria-label="Close" onclick="dismissAlert(this)">
                         <span aria-hidden="true">&times;</span>

@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, flash, session
 from . import bp as profile_bp
 from app.models import db, User
-
+from flask_login import login_required, current_user
 
 
 from .forms import UserProfileForm  # For profile/routes.py
@@ -24,22 +24,22 @@ def search_pexels_images(query):
     
 
 
-
 @profile_bp.route('/update_profile', methods=['GET', 'POST'])
+@login_required
 def update_profile():
-    form = UserProfileForm()
-    user = User.query.get_or_404(session['user_id'])
-
-    if form.validate_on_submit() and 'submit_update' in request.form:
-        user.username = form.username.data
-        user.email = form.email.data
+    user = current_user
+    form = UserProfileForm(obj=current_user)
+    
+    if form.validate_on_submit():
+        form.populate_obj(current_user)
         db.session.commit()
         flash('Your profile has been updated!', 'success')
         return redirect(url_for('profile.update_profile'))
+    return render_template('profile/update_profile.html', form=form, user = user)
 
-    return render_template('profile/update_profile.html', form=form, user=user)
 
 @profile_bp.route('/search_avatar', methods=['GET', 'POST'])
+@login_required
 def search_avatar():
     form = UserProfileForm()  # May need to modify or use a different form to accommodate image-only searches
     user = User.query.get_or_404(session['user_id'])
@@ -56,7 +56,7 @@ def search_avatar():
 
 
 @profile_bp.route('/set_avatar')
-
+@login_required
 def set_avatar():
     image_url = request.args.get('image_url')
     user_id = session['user_id']

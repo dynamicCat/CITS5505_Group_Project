@@ -1,13 +1,13 @@
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import UserMixin
 # Create association table
 accepted_requests = db.Table('accepted_requests',
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
     db.Column('request_id', db.Integer, db.ForeignKey('request.id'), primary_key=True)
 )
 
-class User(db.Model):
+class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     password_hash = db.Column(db.String(128))

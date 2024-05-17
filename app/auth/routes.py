@@ -4,22 +4,23 @@ from . import bp as auth_bp
 from app.models import User
 from .forms import LoginForm, RegistrationForm
 from app import db
+from flask_login import login_user, logout_user, current_user
+
 #from flask_login import current_user
 
 
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
+
 
     #if current_user.is_authenticated:
     #    return redirect(url_for('dashboard.dashboard'))
+@auth_bp.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user and user.check_password(form.password.data):
-            session['user_id'] = user.id
-            session['username'] = user.username
-            session['avatar_url'] = user.avatar_url
+            login_user(user)  # Log in the user
             return redirect(url_for('dashboard.dashboard'))
         else:
             flash('Invalid username or password', 'error')
@@ -38,6 +39,6 @@ def register():
 
 @auth_bp.route('/logout')
 def logout():
-    session.pop('user_id', None)
+    logout_user()
     flash('You have been logged out.')
     return redirect(url_for('auth.login'))

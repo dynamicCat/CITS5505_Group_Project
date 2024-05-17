@@ -1,110 +1,153 @@
-/* Reset some default styles */
-body, html {
+
+* {
     margin: 0;
     padding: 0;
-    background-color: #cae2f9; /* Light blue background */
-  }
-  
-  ul, ol {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Basic styles for the container */
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 5rem auto;
-    padding: 20px;
-    background-color: #ffffff; /* White background for the container */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
-  }
-  
-  /* Navbar styles */
-  .navbar {
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
     background-color: #f8f9fa;
-    padding: 10px 0;
-  }
-  
-  .navbar-brand {
-    float: left;
-    font-size: 24px;
+}
+
+s
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.navbar-brand {
     font-weight: bold;
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .navbar-nav {
-    display: flex;
-    float: right;
-    align-items: center;
-  }
-  
-  .navbar-nav .nav-item {
-    margin-right: 10px;
-  }
-  
-  .nav-link {
-    color: #000000;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .nav-link:hover {
-    color: #007bff;
-  }
-  
-  /* Alert styles */
-  .alert-dismissible .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 1rem;
-    color: inherit;
-  }
-  
-  /* Request details styles */
-  .request-details {
-    margin-top: 20px;
-  }
-  
-  .request-details h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .request-details p {
-    font-size: 1.2rem;
+    color: #343a40;
+}
+
+.navbar-nav .nav-link {
+    color: #343a40;
+}
+
+/* Container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Alert styles */
+.alert {
     margin-bottom: 20px;
-  }
-  
-  .request-details h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .request-details ul {
-    margin-bottom: 20px;
-  }
-  
-  .request-details .list-group-item {
-    background-color: #f8f9fa;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .request-details .btn-success {
-    background-color: #28a745;
-    border: 1px solid #28a745;
+    border-radius: 4px;
+}
+
+.alert-primary {
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.alert-secondary {
+    color: #383d41;
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.alert-light {
+    color: #818182;
+    background-color: #fefefe;
+    border-color: #fdfdfe;
+}
+
+.alert-dark {
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-success {
     color: #ffffff;
-    padding: 10px 20px;
-    border-radius: 5px;
-  }
-  
-  .request-details .btn-success:hover {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    color: #ffffff;
     background-color: #218838;
     border-color: #1e7e34;
-  }
+}
+
+/* List group styles */
+.list-group {
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.list-group-item:first-child {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+.list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
+
+/* Close button styles */
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000000;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.5;
+}
+
+.close:hover {
+    color: #000000;
+    text-decoration: none;
+    opacity: 0.75;
+}

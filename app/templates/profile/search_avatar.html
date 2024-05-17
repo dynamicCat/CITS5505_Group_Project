@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Avatar</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/avatar.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         .navbar-avatar {
             width: 40px; 
@@ -14,65 +13,51 @@
             object-fit: cover; 
             margin-right: 10px; 
         }
-        .avatar-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .image-container {
-            width: 180px; /* Set width */
-            height: 180px; /* Set height */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f8f9fa;
-            border: 1px solid #ced4da;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
-    <header id="header">
-        <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
-        <nav id="nav">
-            <ul>
-                {% if session.get('username') %}
-                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                {% endif %}
-                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
-                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
-                {% if session.get('username') %}
-                <li>
-                    <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                    <a class="nav-link">{{ session['username'] }}</a>
-                </li>
-                {% endif %}
-                <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('dashboard.dashboard') }}">RequestHub</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    {% if session.get('username') %}
+                    <li class="nav-item align-items-center d-flex">
+                        <img src="{{ user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
+
+                        <a class="nav-link" >{{ session['username'] }}</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard.dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
-        <h2 class="text-center">Search and Select Your New Avatar</h2>
-        <form action="{{ url_for('profile.search_avatar') }}" method="post" class="text-center">
-            <div class="form-group d-inline-block">
-                <input type="text" class="form-control search-input" name="image_search" placeholder="Search for images">
+        <h2>Search and Select Your New Avatar</h2>
+        <form action="{{ url_for('profile.search_avatar') }}" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" name="image_search" placeholder="Search for images">
                 <button type="submit" class="btn btn-primary mt-3" name="submit_search">Search</button>
             </div>
         </form>
         {% if images %}
-        <div class="search-results">
-            <div class="image-grid">
-                {% for image in images %}
-                <div class="image-item">
-                    <div class="image-container">
-                        <img src="{{ image.src.medium }}" alt="Image" class="avatar-image">
-                    </div>
-                    <a href="{{ url_for('profile.set_avatar', image_url=image.src.medium) }}" class="btn btn-success">Set as Avatar</a>
-                </div>
-                {% endfor %}
+        <div class="row">
+            {% for image in images %}
+            <div class="col-md-4">
+                <img src="{{ image.src.medium }}" alt="Image" class="img-fluid">
+                <a href="{{ url_for('profile.set_avatar', image_url=image.src.medium) }}" class="btn btn-success">Set as Avatar</a>
             </div>
+            {% endfor %}
         </div>
         {% endif %}
     </div>

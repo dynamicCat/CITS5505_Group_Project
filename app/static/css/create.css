@@ -59,14 +59,10 @@ ul, ol {
 /* Form styles */
 .form-group {
   margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 .form-control {
-  width: 60%; 
-  max-width: 600px; 
+  width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 5px;
@@ -88,7 +84,6 @@ textarea.form-control {
   background-color: #007bff;
   border: 1px solid #007bff;
   color: #ffffff;
-  margin-top: 10px; /* Add this line to move the button down */
 }
 
 .btn-primary:hover {
@@ -113,92 +108,4 @@ textarea.form-control {
   justify-content: center;
   gap: 10px; /* Space between buttons */
   margin-top: 20px;
-}
-
-/* List group styles */
-.list-group {
-  display: flex;
-  flex-direction: column;
-  padding-left: 0;
-  margin-bottom: 0;
-}
-
-.list-group-item {
-  position: relative;
-  display: block;
-  padding: 0.75rem 1.25rem;
-  margin-bottom: -1px;
-  background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, .125);
-}
-
-.list-group-item-action {
-  width: 100%;
-  color: #495057;
-  text-align: inherit;
-  border-bottom: 1px solid rgba(0, 0, 0, .125);
-}
-
-.flex-column {
-  flex-direction: column !important;
-}
-
-.align-items-start {
-  align-items: flex-start !important;
-}
-
-.mt-5 {
-  margin-top: 3rem !important;
-}
-
-.alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
-}
-
-/* Adjust the input box width */
-.form-group input {
-  width: 60%; /* Adjust width as needed */
-}
-
-/* Ensure the list group does not overflow horizontally */
-.list-group {
-  max-height: 440px; /* Adjust height as needed */
-  overflow-y: auto; /* Enable vertical scrolling */
-  overflow-x: hidden; /* Disable horizontal scrolling */
-  border-radius: 8px; /* Ensure rounded corners */
-}
-
-/* Ensure list items are styled similarly to the dashboard items */
-.list-group-item {
-  background-color: #0e005c; /* Match the dashboard item background color */
-  padding: 10px 15px;
-  border-radius: 8px; /* Ensure rounded corners */
-  margin-bottom: 10px;
-  transition: background-color 0.3s ease;
-  color: white;
-}
-
-.list-group-item:hover {
-  background-color: #094ea9ce; /* Darker blue on hover */
-}
-
-.list-group-item a {
-  color: inherit; /* Keep text color consistent */
-  text-decoration: none; /* Remove underline */
-}
-
-.list-group-item h5 {
-  font-size: 1.2rem; /* Adjust title font size */
-  margin: 0;
-  padding-bottom: 5px; /* Add some space below the title */
-}
-
-.list-group-item p {
-  font-size: 0.9rem; /* Adjust description font size */
-  margin: 5px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
