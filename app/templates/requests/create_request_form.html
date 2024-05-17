@@ -4,19 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Request</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header-footer.css') }}">
-    <style>
-        .navbar-avatar {
-            width: 40px; 
-            height: 40px;
-            border-radius: 50%; 
-            object-fit: cover; 
-            margin-right: 10px; 
-        }
-    </style>
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='js/js.js') }}"></script>
+    
 </head>
 <body>
+    <div id="burger">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+    </div>
+
     <header id="header">
         <h1><a href="{{ url_for('main.home') }}">RequestHub</a></h1>
         <nav id="nav">
@@ -24,12 +27,10 @@
                 {% if session.get('username') %}
                 {% endif %}
                 <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url_for('requests.search_requests') }}">Search Requests</a></li>
-                <li><a href="{{ url_for('requests.create_request') }}">Create Request</a></li>
+                <li><a href="{{ url_for('requests.search_requests') }}">Search</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item align-items-center d-flex">
-                    <img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}">{{ current_user.username }}</a>
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}"><img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar"></a>
                 </li>
                 {% endif %}
                 <li><a href="{{ url_for('auth.logout') }}" class="button">Logout</a></li>
