@@ -37,6 +37,19 @@
         </nav>
     </header>
     <div class="container mt-5">
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="custom-alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="custom-close" data-dismiss="alert" aria-label="Close" onclick="dismissAlert(this)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
         <h2 class="text-center">Search and Select Your New Avatar</h2>
         <form action="{{ url_for('profile.search_avatar') }}" method="post" class="text-center">
             <div class="form-group d-inline-block">
@@ -56,13 +69,10 @@
                 </div>
                 {% endfor %}
             </div>
-        </div>
-        {% else %}
-            <div class="alert alert-info" role="alert">
-                No requests found. Please try a different search query.
-            </div>
+        </div>     
         {% endif %}
 
     </div>
+
 </body>
 </html>

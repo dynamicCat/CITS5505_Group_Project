@@ -160,8 +160,35 @@ textarea.form-control {
   padding-right: 10px; /* Add padding to avoid content hidden by scrollbar */
 }
 
-.alert-info {
-  color: #0c5460;
-  background-color: #d1ecf1;
-  border-color: #bee5eb;
+/* Custom Alert Styles */
+.custom-alert {
+  color: #721c24; 
+  background-color: #f8d7da;
+  border-color: #f5c6cb; 
+  padding: 10px; 
+  border-radius: 5px; 
+  position: relative; 
+  margin-bottom: 20px; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding-right: 4rem;
+  width: 75%; 
+}
+
+.custom-close {
+  color: #721c24; 
+  background-color: transparent;
+  border: none; 
+  cursor: pointer;
+  font-size: 1.2rem; 
+  position: absolute; 
+  top: 10px; 
+  right: 10px;
+  opacity: 0.8;
+}
+
+.custom-close:hover {
+  opacity: 1;
 }
