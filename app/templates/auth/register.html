@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
     <title>Register</title>
 
     <!-- CSS -->
@@ -44,19 +46,27 @@
                 {% endfor %}
 
 
-                <form method="POST" action="{{ url_for('auth.register') }}">
+                <form method="POST" action="{{ url_for('auth.register') }}" id="registrationForm">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
                         {{ form.username.label(class="form-label") }}
-                        {{ form.username(class="form-control") }}
+                        {{ form.username(class="form-control", id="username") }}
+                        <div id="usernameFeedback" class="invalid-feedback"></div>
                     </div>
                     <div class="form-group">
                         {{ form.password.label(class="form-label") }}
-                        {{ form.password(class="form-control") }}
+                        {{ form.password(class="form-control", id="password") }}
+                        <div id="passwordFeedback" class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control">
+                        <div id="confirmPasswordFeedback" class="invalid-feedback"></div>
                     </div>
                     <p>Already have an account? <a href="{{ url_for('auth.login') }}">Login here</a></p>
                     <button type="submit" class="btn btn-primary">Create New User</button>
                 </form>
+                <script src="{{ url_for('static', filename='js/register_validation.js') }}"></script>                                                
 
 
             </div>

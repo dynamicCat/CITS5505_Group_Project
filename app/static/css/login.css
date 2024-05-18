@@ -129,3 +129,42 @@ a:hover {
         border-radius: .25rem;
     }
 }
+.is-valid {
+    border-color: #28a745;
+}
+
+.is-invalid {
+    border-color: #dc3545;
+}
+
+.invalid-feedback {
+    display: none;
+    color: #dc3545;
+}
+
+.is-invalid + .invalid-feedback {
+    display: block;
+}
+
+.valid-feedback {
+    display: none;
+    color: #28a745;
+}
+
+.is-valid + .valid-feedback {
+    display: block;
+}
+
+.feedback {
+    display: none;
+}
+
+.is-invalid + .feedback {
+    display: block;
+    color: #dc3545;
+}
+
+.is-valid + .feedback {
+    display: block;
+    color: #28a745;
+}

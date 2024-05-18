@@ -1,5 +1,5 @@
 # auth/routes.py
-from flask import  render_template, redirect, url_for, flash, request, session
+from flask import  render_template, redirect, url_for, flash, request, session, jsonify
 from . import bp as auth_bp
 from app.models import User
 from .forms import LoginForm, RegistrationForm
@@ -14,6 +14,12 @@ from flask_login import login_user, logout_user, current_user
 
     #if current_user.is_authenticated:
     #    return redirect(url_for('dashboard.dashboard'))
+@auth_bp.route('/check_username')
+def check_username():
+    username = request.args.get('username')
+    user = User.query.filter_by(username=username).first()
+    return jsonify({'available': user is None})
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -36,6 +42,7 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data)
         user.set_password(form.password.data)
+        user.avatar_url = '/static/images/default_avatar.jpg'
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('auth.login'))
