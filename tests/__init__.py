@@ -6,6 +6,14 @@ from app.requests import bp as requests_blueprint
 from app.profile import bp as profile_blueprint
 from app import db
 from tests.test_config import TestConfig
+import sys 
+import os 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+
+
+
+
 
 def create_app():
     app = Flask(__name__)
