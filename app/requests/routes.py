@@ -9,6 +9,11 @@ from .forms import CreateRequestForm
 @requests_bp.route('/create_request', methods=['GET', 'POST'])
 @login_required
 def create_request():
+    """
+    Handle creation of a new user request.
+    Displays a form for creating a request and processes the form submission.
+    If the form is valid, a new Request object is created and saved.
+    """
     form = CreateRequestForm()
     if form.validate_on_submit():
         new_request = Request(
@@ -25,6 +30,10 @@ def create_request():
 @requests_bp.route('/search_requests', methods=['GET'])
 @login_required
 def search_requests():
+    """
+    Search and display requests based on a user-provided query.
+    Retrieves and displays requests that match the query in title or description.
+    """
     query = request.args.get('query', '')
     search_results = []
     if query:
@@ -35,6 +44,10 @@ def search_requests():
 @requests_bp.route('/request_details/<int:request_id>', methods=['GET'])
 @login_required
 def request_details(request_id):
+    """
+    Display detailed view of a specific request.
+    Includes responses from users who have accepted the request.
+    """
     request = Request.query.get(request_id)
     if not request:
         flash('Request not found.')
@@ -50,6 +63,10 @@ def request_details(request_id):
 @requests_bp.route('/accept_request/<int:request_id>', methods=['GET'])
 @login_required
 def accept_request(request_id):
+    """
+    Allows a user to accept a request.
+    Adds the user to the list of people who have accepted the request.
+    """
     if not current_user.is_authenticated:
         flash('You need to login first.', 'error')
         return redirect(url_for('auth.login'))
@@ -75,7 +92,10 @@ def accept_request(request_id):
 @requests_bp.route('/my_accepted_requests')
 @login_required
 def my_accepted_requests():
-    # Use current_user to directly access logged in user information
+    """
+    Displays a list of requests that the current user has accepted.
+    This provides an easy way for users to see their active engagements.
+    """
     accepted_requests = current_user.accepted_requests  # Directly obtain the accepted request of the current user
     return render_template('requests/my_accepted_requests.html', user=current_user, accepted_requests=accepted_requests)
 
@@ -83,6 +103,9 @@ def my_accepted_requests():
 @requests_bp.route('/answer_request/<int:request_id>', methods=['GET'])
 @login_required
 def answer_request(request_id):
+    """
+    Provide a form for the user to submit an answer to a request they have accepted.
+    """
     request = Request.query.get(request_id)
     if not request:
         flash('Request not found.')
@@ -102,6 +125,10 @@ def answer_request(request_id):
 @requests_bp.route('/submit_answer/<int:request_id>', methods=['POST'])
 @login_required
 def submit_answer(request_id):
+    """
+    Handles the submission of an answer for a specific request.
+    Validates that the answer text is not empty before saving it to the database.
+    """
     response_text = request.form.get('response')
     if response_text:
         #Create an answer instance and save it to the database
