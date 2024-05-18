@@ -16,6 +16,9 @@ from flask_login import login_user, logout_user, current_user
     #    return redirect(url_for('dashboard.dashboard'))
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard.dashboard'))
+    
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -24,6 +27,7 @@ def login():
             return redirect(url_for('dashboard.dashboard'))
         else:
             flash('Invalid username or password', 'error')
+    
     return render_template('auth/login.html', form=form)
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
