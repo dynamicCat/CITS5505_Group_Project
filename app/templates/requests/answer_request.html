@@ -54,7 +54,7 @@
                     {% for response in responses %}
                         <li class="list-group-item">
                             <img src="{{ response.responder.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar">
-                            <strong>{{ response.responder.username }}:</strong>
+                            <strong>{{ response.responder.username }}: </strong>
                             <p>{{ response.response_text }}</p>
                         </li>
                     {% endfor %}

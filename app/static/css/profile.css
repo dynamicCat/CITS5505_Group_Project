@@ -16,7 +16,7 @@ ul, ol {
   display: flex;
   justify-content: space-between;
   align-items: center; /* Center items vertically */
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 5rem auto; /* Center the form vertically */
   padding: 40px; /* Increase padding */
@@ -166,4 +166,26 @@ h2 {
   margin-bottom: 20px; /* Space below the title */
   text-align: center; /* Center align */
   color: #000; /* Font color */
+}
+
+@media (max-width:785px) {
+  .container {
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 20px; 
+  }
+
+  .profile-form {
+    width: 95%; 
+    margin-bottom: 20px; 
+  }
+
+  .profile-avatar {
+    margin-bottom: 20px; 
+    border-top: 1px solid #ced4da; 
+    width: 95%; 
+    margin-bottom: 20px; 
+    border-left: none;
+  }
+  
 }

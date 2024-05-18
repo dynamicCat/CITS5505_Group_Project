@@ -22,7 +22,7 @@ a {
     color: #666f77;
     font-weight: 500;
     height: inherit;
-    left: 1.25em;
+    left: 2em;
     line-height: inherit;
     margin: 0;
     padding: 0;
@@ -31,7 +31,7 @@ a {
 }
 
 #header h1 a {
-    font-size: 1.25em;
+    font-size: 1em;
 }
 
 #header nav {
@@ -182,7 +182,7 @@ footer {
 }
 
 /* mobile navigation styles */
-@media (max-width:775px) {
+@media (max-width:785px) {
     #header {
       position: fixed;
       top: 0;

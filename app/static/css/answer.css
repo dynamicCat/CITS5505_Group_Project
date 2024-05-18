@@ -13,7 +13,7 @@ ul, ol {
 
 /* Basic styles for the container */
 .container {
-  width: 100%;
+  width: 90%;
   max-width: 1200px;
   margin: 5rem auto; /* Center the form vertically */
   padding: 20px;

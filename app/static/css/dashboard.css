@@ -20,6 +20,7 @@ a {
     margin-left: 12px;
     flex: 0 0 auto; 
     overflow-y: auto;
+    display: block;
 }
 
 .content-panel {
@@ -62,8 +63,8 @@ h2 {
     background-color: #e1f0ff;
     transition: background-color 0.3s ease;
     color: black;
-    margin-top: 30px;
-    margin-bottom: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -124,7 +125,6 @@ h2 {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     overflow-y: auto;
     max-height: 440px; 
-    width: 95%;
 }
 
 .tab-content.active {
@@ -185,3 +185,21 @@ h2 {
     color: white; /* Ensure text color stays white on hover */
 }
 
+
+/* mobile styles */
+@media (max-width:785px) {
+    .profile-sidebar {
+        display: none;
+    }
+
+    .content-panel {
+        width: 90%; 
+        padding: 20px;
+        background-color: #cae2f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        margin-right: 12px;
+        margin-left: 12px;
+    }
+    
+}

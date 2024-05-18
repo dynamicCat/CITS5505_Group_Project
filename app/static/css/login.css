@@ -19,6 +19,7 @@
 
 .login-image {
     flex: 1 1 auto;
+    display: block;
     max-width: 50%; 
 }
 
@@ -95,4 +96,36 @@ a:hover {
 
 .custom-close:hover {
     opacity: 1;
+}
+
+/* mobile styles */
+@media (max-width:785px) {
+
+    .login-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px; 
+        width: 100%;
+    }
+
+    .login-image {
+        flex: 1 1 auto;
+        display: block;
+        max-width: 60%; 
+    }
+
+    .login-form {
+        flex: 1 1 auto;
+        max-width: 70%;
+    }
+
+    .form-control {
+        display: block;
+        width: 90%;
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
 }

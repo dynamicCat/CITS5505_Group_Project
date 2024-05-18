@@ -29,6 +29,7 @@
                 {% endif %}
                 <li><a href="{{ url_for('requests.search_requests') }}">Search</a></li>
                 <li><a href="{{ url_for('requests.create_request') }}">Create</a></li>
+                <li><a href="{{ url_for('requests.my_accepted_requests') }}">Accepted</a></li>
 
                 {% if current_user.is_authenticated %}
                 <li class="nav-item align-items-center d-flex">
@@ -53,6 +54,7 @@
             <div class="profile-actions">
                 <a class="btn" href="{{ url_for('requests.create_request') }}" role="button">Create Request</a>
                 <a class="btn" href="{{ url_for('requests.search_requests') }}" role="button">Search Requests</a>
+                <a class="btn" href="{{ url_for('requests.my_accepted_requests') }}" role="button">My Accepted Requests</a>
             </div>
         </div>
 
@@ -62,7 +64,6 @@
             <div class="tab-navigation">
                 <button class="tab-button active" onclick="switchTab('tab1')">My Requests</button>
                 <button class="tab-button" onclick="switchTab('tab2')">My Responses</button>
-                <button class="tab-button" onclick="switchTab('tab3')">My Accepted Requests</button>
             </div>
         
             <!-- Tab Content -->
@@ -106,24 +107,6 @@
                 </div>
             </div>
         
-            <div id="tab3" class="tab-content">
-                <div>
-                    <h2>My Accepted Requests</h2>
-                    {% if accepted_requests %}
-                    <ul class="list-group">
-                        {% for request in accepted_requests %}
-                        <li class="list-group-item" style="position: relative;">
-                            <p>Title: {{ request.title }} </p>
-                            <p>Description: {{ request.description }}</p>
-                            <a href="{{ url_for('requests.my_accepted_requests', request_id=request.id) }}" class="answer-btn">Answer</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% else %}
-                    <p>No response yet.</p>
-                    {% endif %}
-                </div>
-            </div>
         </div>
     </div>
 </body>
