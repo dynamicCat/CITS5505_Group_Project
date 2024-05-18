@@ -58,3 +58,52 @@ flask run
 4. Visit `http://localhost:5000` in your browser to get started. 
 
 ## Run the test
+
+To ensure that the application is working correctly, you can run the provided unit tests and functional tests. There are three main test scripts: `test_models.py`, `test_routes.py`, and `test_selenium.py`.
+
+### 1. test_models.py
+This script tests the application's models to ensure they function as expected. 
+
+#### Example Test Cases:
+- User creation and password hashing.
+
+#### Running the Test:
+```bash
+python3 -m unittest tests/test_models.py
+```
+
+### 2. test_routes.py
+This script tests the application's routes to ensure they return the correct responses.
+
+#### Example Test Cases:
+- Home route returns status code 200 and contains 'Welcome' text.
+
+#### Running the Test:
+```bash
+python3 -m unittest tests/test_routes.py
+```
+
+### 3. test_selenium.py
+This script uses Selenium to perform functional tests by simulating user interactions with the application.
+
+#### Requirements:
+- Google Chrome browser
+- ChromeDriver (compatible with your version of Chrome)
+
+#### Setting Up ChromeDriver:
+ChromeDriver can be installed using the `webdriver_manager` package, which is already included in the `requirements.txt`.
+
+#### Example Test Cases:
+- Logging in with incorrect and correct credentials.
+- Navigating through different parts of the application.
+- Verifying responsiveness of the application.
+
+#### Running the Test:
+```bash
+python3 tests/test_selenium.py
+```
+### Notes:
+- Ensure that the Flask application is running locally before executing Selenium tests.
+- The Selenium tests open a browser window and perform actions on the application, so you might see browser windows opening and closing during the test.
+
+By following these steps, you can run the tests to verify that the application is functioning correctly. If any tests fail, review the test output for details on what went wrong and adjust the code as necessary.
