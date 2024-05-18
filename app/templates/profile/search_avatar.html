@@ -57,7 +57,12 @@
                 {% endfor %}
             </div>
         </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                No requests found. Please try a different search query.
+            </div>
         {% endif %}
+
     </div>
 </body>
 </html>
