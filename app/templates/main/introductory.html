@@ -27,19 +27,32 @@
                 <li><a href="#banner">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#function">Function</a></li>
+                {% if not current_user.is_authenticated %}
                 <li><a href="{{ url_for('auth.login') }}" class="button">Login</a></li>
+                {% else %}
+                <li class="nav-item align-items-center d-flex">
+                    <!-- Add a query string to the image URL to prevent caching -->
+                    <a class="nav-link" href="{{ url_for('profile.update_profile') }}"><img src="{{ current_user.avatar_url }}?t={{ current_time }}" alt="User Avatar" class="navbar-avatar"></a>
+                </li>
+                <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
 
     <section id="banner">
         <div class="inner">
+            {% if current_user.is_authenticated %}
+            <h2>Hi, {{ user.username }}</h2>
+            {% endif %}
             <h2>Welcome to RequestHub</h2>
             <p>Get started by either logging in to your existing account or creating a new one to explore the possibilities</p>
+            {% if not current_user.is_authenticated %}
             <ul class="actions">
                 <li><a href="{{ url_for('auth.register') }}" class="button special">Sign Up</a></li>
                 <li><a href="{{ url_for('auth.login') }}" class="button alt">Login</a></li>
             </ul>
+            {% endif %}
         </div>
     </section>
     
