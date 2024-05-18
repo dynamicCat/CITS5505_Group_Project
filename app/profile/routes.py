@@ -11,6 +11,13 @@ from .forms import UserProfileForm  # For profile/routes.py
 
 import requests
 def search_pexels_images(query):
+    """
+    Fetches images from the Pexels API based on the search query provided.
+    Args:
+        query (str): Search term for images.
+    Returns:
+        list: A list of image data if successful, otherwise an empty list.
+    """
     api_key = "SwtLixI0IQ8GuhDNDwVheitnQpSbEf2kXc4sL5Mc3tl6cJ5NM7eBaIm4"
     url = "https://api.pexels.com/v1/search"
     headers = {"Authorization": api_key}
@@ -27,6 +34,11 @@ def search_pexels_images(query):
 @profile_bp.route('/update_profile', methods=['GET', 'POST'])
 @login_required
 def update_profile():
+    """
+    Route to update the current user's profile.
+    On GET, display the profile form pre-filled with current user data.
+    On POST, if form validation is successful, update user data in the database.
+    """
     form = UserProfileForm(obj=current_user)
     if form.validate_on_submit():
         form.populate_obj(current_user)
@@ -38,7 +50,11 @@ def update_profile():
 @profile_bp.route('/search_avatar', methods=['GET', 'POST'])
 @login_required
 def search_avatar():
-    form = UserProfileForm()  # Consider modifying or using a different form if necessary
+    """
+    Route to search for avatar images using an external API (Pexels).
+    If a POST request is made with a search query, fetch images and display them.
+    """
+    form = UserProfileForm()  
     if request.method == 'POST' and 'submit_search' in request.form:
         images = search_pexels_images(form.image_search.data)
         if images:
@@ -50,6 +66,12 @@ def search_avatar():
 @profile_bp.route('/set_avatar')
 @login_required
 def set_avatar():
+
+    """
+    Route to set a selected image URL as the current user's avatar.
+    Expects an image URL to be provided as a query parameter.
+    Updates the user's avatar URL in the database and redirects to the profile update page.
+    """
     image_url = request.args.get('image_url')
     if current_user:
         current_user.avatar_url = image_url

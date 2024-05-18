@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     content.innerHTML = "<p>No results found. Try another search term.</p>";
                 } else {
                     content.innerHTML = pages[pageId].extract;
+                    document.getElementById('wikiLink').href = `https://en.wikipedia.org/?curid=${pageId}`; // Set the link to the specific Wikipedia article
                 }
             })
             .catch(error => {

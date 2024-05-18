@@ -6,14 +6,8 @@ from .forms import LoginForm, RegistrationForm
 from app import db
 from flask_login import login_user, logout_user, current_user
 
-#from flask_login import current_user
+# Authentication blueprint routes for Flask application.
 
-
-
-
-
-    #if current_user.is_authenticated:
-    #    return redirect(url_for('dashboard.dashboard'))
 @auth_bp.route('/check_username')
 def check_username():
     username = request.args.get('username')
@@ -22,6 +16,13 @@ def check_username():
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Route to handle user login.
+    Displays login form and handles its submission.
+    If form is submitted and valid, checks if user exists and password is correct.
+    If credentials are valid, logs the user in and redirects to the dashboard.
+    Otherwise, displays an error message.
+    """
     if current_user.is_authenticated:
         return redirect(url_for('dashboard.dashboard'))
     
@@ -38,6 +39,12 @@ def login():
 
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Route to handle user registration.
+    Displays registration form and handles its submission.
+    If form is submitted and valid, creates a new user, saves it to the database,
+    and redirects to the login page.
+    """
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data)
@@ -50,6 +57,10 @@ def register():
 
 @auth_bp.route('/logout')
 def logout():
+    """
+    Route to handle user logout.
+    Logs out the current user and redirects to the login page with a logout message.
+    """
     logout_user()
     flash('You have been logged out.')
     return redirect(url_for('auth.login'))
