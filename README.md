@@ -4,10 +4,20 @@
 RequestHub is an interactive web platform that allows users to create accounts, post requests, and answer other users' requests. You can post requests, solve problems, and interact with the community here. The purpose of this application is to provide users with a fun and useful platform to enhance communication and collaboration through various forms of requests and responses.
 
 ### Main features
+- **Introduction page**: Users can learn more about the application on this page.
 - **User account management**: Users can register and log in to manage their own profile. 
+- **dashboard**.
 - **Create requests**: Users can create requests based on their own questions. 
 - **Find and accept requests**: Users can browse existing requests and choose to accept the challenge or provide help. 
+- **Answer Request**: Users can answer received requests.
+- **Set personal information and user avatar**: Users can reset the user name and user email. Users can also search for images to set their avatar. 
+- **Search information**: Users can search for Wikipedia information they want to know through the search bar on the answer interface.
 - **Interactive elements**: Users can communicate including leaving comments and expressing likes.
+- **Using flask wtform and flask login modules**: User data security is ensured through these two modules.
+
+
+
+
 
 ## Group Member
 | Student ID | Student Name | GitHub Name |
