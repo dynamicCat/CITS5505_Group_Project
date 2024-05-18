@@ -6,7 +6,7 @@ RequestHub is an interactive web platform that allows users to create accounts, 
 ### Main features
 - **Introduction page**: Users can learn more about the application on this page.
 - **User account management**: Users can register and log in to manage their own profile. 
-- **dashboard**.
+- **Dashboard**.
 - **Create requests**: Users can create requests based on their own questions. 
 - **Find and accept requests**: Users can browse existing requests and choose to accept the challenge or provide help. 
 - **Answer Request**: Users can answer received requests.
@@ -15,17 +15,13 @@ RequestHub is an interactive web platform that allows users to create accounts, 
 - **Interactive elements**: Users can communicate including leaving comments and expressing likes.
 - **Using flask wtform and flask login modules**: User data security is ensured through these two modules.
 
-
-
-
-
 ## Group Member
 | Student ID | Student Name | GitHub Name |
-|----------|-------------|---------------|
-| 24065267 | Zhenhao Zhu | dynamicCat    |
-| 23797775 | Zihan Peng | ZihanPeng      |
-| 23769386 | Yuchen Wang | kkglovemy       |
-| 23964581 | Renjun Liu | Ethaicraft |
+|------------|--------------|-------------|
+| 24065267   | Zhenhao Zhu  | dynamicCat  |
+| 23797775   | Zihan Peng   | ZihanPeng   |
+| 23769386   | Yuchen Wang  | kkglovemy   |
+| 23964581   | Renjun Liu   | Ethaicraft  |
 
 ## Application Architecture
 
@@ -40,24 +36,48 @@ This application uses Flask as the backend framework and uses SQLite database fo
 ## Start the application
 
 To start the application locally, follow these steps:
+
+### Unix/Linux
+
 1. Clone the repository:
-```bash
-git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
-```
+    ```bash
+    git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
+    ```
 
 2. Install dependencies:   
-Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage.
-```bash
-pip install -r requirements.txt
-```
+    Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 3. Run the application:
-```bash
-flask run
-```
+    ```bash
+    flask run
+    ```
+
 4. Visit `http://localhost:5000` in your browser to get started. 
 
-## Run the test
+### Windows
+
+1. Clone the repository:
+    ```cmd
+    git clone https://github.com/dynamicCat/CITS5505_Group_Project.git
+    ```
+
+2. Install dependencies:   
+    Before starting the program, you can create a file called ".env" in the root directory. Its purpose is to define the "SECRET_KEY" and "DATABASE_URL" content required by the application to store database encryption and storage.
+    ```cmd
+    pip install -r requirements.txt
+    ```
+
+3. Run the application:
+    ```cmd
+    flask run
+    ```
+
+4. Visit `http://localhost:5000` in your browser to get started. 
+
+## Run the tests
 
 To ensure that the application is working correctly, you can run the provided unit tests and functional tests. There are three main test scripts: `test_models.py`, `test_routes.py`, and `test_selenium.py`.
 
@@ -68,8 +88,15 @@ This script tests the application's models to ensure they function as expected.
 - User creation and password hashing.
 
 #### Running the Test:
+
+**Unix/Linux:**
 ```bash
 python3 -m unittest tests/test_models.py
+```
+
+**Windows:**
+```cmd
+.\.venv\Scripts\python.exe -m unittest tests\test_models.py
 ```
 
 ### 2. test_routes.py
@@ -79,8 +106,15 @@ This script tests the application's routes to ensure they return the correct res
 - Home route returns status code 200 and contains 'Welcome' text.
 
 #### Running the Test:
+
+**Unix/Linux:**
 ```bash
 python3 -m unittest tests/test_routes.py
+```
+
+**Windows:**
+```cmd
+.\.venv\Scripts\python.exe -m unittest tests\test_routes.py
 ```
 
 ### 3. test_selenium.py
@@ -99,9 +133,17 @@ ChromeDriver can be installed using the `webdriver_manager` package, which is al
 - Verifying responsiveness of the application.
 
 #### Running the Test:
+
+**Unix/Linux:**
 ```bash
 python3 tests/test_selenium.py
 ```
+
+**Windows:**
+```cmd
+.\.venv\Scripts\python.exe tests\test_selenium.py
+```
+
 ### Notes:
 - Ensure that the Flask application is running locally before executing Selenium tests.
 - The Selenium tests open a browser window and perform actions on the application, so you might see browser windows opening and closing during the test.
