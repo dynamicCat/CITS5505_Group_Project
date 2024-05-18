@@ -11,6 +11,7 @@
     
     <!-- JS -->
     <script src="{{ url_for('static', filename='js/js.js') }}"></script>
+    <script src="https://kit.fontawesome.com/f0c92dd9f8.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="burger">
@@ -62,6 +63,18 @@
             {% else %}
                 <p>No responses yet.</p>
             {% endif %}
+        </div>
+
+        <div class="wiki-help">
+            <h2>
+                Wikipedia Help
+                <i id="toggle-icon" class="fas fa-chevron-down" onclick="toggleHelp()"></i>
+            </h2>
+            <div id="help-content" style="display: none;">
+                <input type="text" class="form-control search-input" id="searchTerm" placeholder="Search Wikipedia">
+                <button id="loadContent" class="btn btn-primary">Search</button>
+                <div id="apiContent"></div>
+            </div>
         </div>
         
         <!-- Optionally include a form for the current user to submit a response -->

@@ -205,3 +205,35 @@ ul, ol {
   height: 150px; /* Increase height */
   margin-top: 10px; /* Add margin-top for spacing */
 }
+
+
+/* Wiki search API */
+.wiki-help{
+  background-color: #cae2f9;
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  margin-bottom: 20px;
+}
+
+.form-control {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.search-input {
+  width: 300px; /* Adjust width to make space for the search button */
+  display: inline-block;
+}
+
+#apiContent{
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  max-height: 300px; /* Set a fixed height */
+  overflow-y: scroll; /* Add vertical scroll bar */
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
